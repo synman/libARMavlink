@@ -1,0 +1,33 @@
+/**
+ * @mainpage libARMavlink Documentation
+ *
+ * @section ARMAVLINK_intro_sec Introduction
+ *
+ * The ARCodecs library provides an API to decode video and audio codecs
+ *
+ * The library uses @ref ARMAVLINK_Manager_t object as its main entry point
+ *
+ * @section ARMAVLINK_flow_sec ARCodecs usage
+ *
+ * The typical use flow of the ARCodecs library is the following:
+ *
+ * @subsection ARMAVLINK_create_subsec 1> Create the manager
+ *
+ * The @ref ARMAVLINK_Manager_t can now be properly created, using the
+ * @ref ARMAVLINK_Manager_New function.
+ *
+ * @subsection ARMAVLINK_use_subsec 2> Use the manager
+ *
+ * At this point the @ref ARMAVLINK_Manager_t is ready for use. All send and
+ * read functions are thread safe, so multiple threads can use the
+ * @ref ARMAVLINK_Manager_t at the same time without any external
+ * synchronization procedures.
+ *
+ * @subsection ARMAVLINK_clean_sec 2> Close the manager
+ *
+ * The @ref ARMAVLINK_Manager_t object can the be destroyed using
+ * @ref ARMAVLINK_Manager_Delete function.
+ *
+ * This call is mandatory, as it reclaims all allocated memory.
+ *
+ */
