@@ -10,7 +10,7 @@
 
 #include <libARMavlink/ARMAVLINK_Error.h>
 #include <libARMavlink/ARMAVLINK_Manager.h>
-#include <libARMavlink/ARMAVLINK_Maths.h>
-#include <libARMavlink/ARMAVLINK_TrajectoryGenerator.h>
-
+#include <libARMavlink/ARMAVLINK_FileGenerator.h>
+#include <libARMavlink/ARMAVLINK_FileParser.h>
+#include <libARMavlink/ARMAVLINK_ListUtils.h>
 #endif // _ARMAVLINK_H_

@@ -5,13 +5,24 @@ ACLOCAL_AMFLAGS                                             =   -I m4
 
 # The list of header files that belong to the library (to be installed later)
 HEADER_FILES                                                =   ../Includes/libARMavlink/libARMavlink.h                   \
+                                                                ../Includes/libARMavlink/ARMAVLINK_FileGenerator.h        \
+                                                                ../Includes/libARMavlink/ARMAVLINK_FileParser.h           \
                                                                 ../Includes/libARMavlink/ARMAVLINK_Manager.h              \
+                                                                ../Includes/libARMavlink/ARMAVLINK_ListUtils.h            \
                                                                 ../Includes/libARMavlink/ARMAVLINK_Error.h
 
 # The sources to add to the library and to add to the source distribution
-SOURCE_FILES                                                =   $(HEADER_FILES)                                              \
-                                                                ../Sources/ARMAVLINK_Manager.c                               \
-                                                                ../Sources/ARMAVLINK_Manager.h                               \
+SOURCE_FILES                                                =   $(HEADER_FILES)                                           \
+                                                                ../Sources/ARMAVLINK_FileGenerator.c                      \
+                                                                ../Sources/ARMAVLINK_FileGenerator.h                      \
+                                                                ../Sources/ARMAVLINK_FileParser.c                         \
+                                                                ../Sources/ARMAVLINK_FileParser.h                         \
+                                                                ../Sources/ARMAVLINK_Manager.c                            \
+                                                                ../Sources/ARMAVLINK_Manager.h                            \
+                                                                ../Sources/ARMAVLINK_ListUtils.c                          \
+                                                                ../Sources/ARMAVLINK_ListUtils.h                          \
+                                                                ../Sources/ARMAVLINK_WaypointUtils.c                      \
+                                                                ../Sources/ARMAVLINK_WaypointUtils.h                      \
                                                                 ../Sources/ARMAVLINK_Error.c
 
 # The library names to build (note we are building static and shared libs)

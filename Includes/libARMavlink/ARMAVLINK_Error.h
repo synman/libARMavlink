@@ -20,6 +20,17 @@ typedef enum
     ARMAVLINK_ERROR_BAD_PARAMETER,                               /**< Bad parameters */
     
     ARMAVLINK_ERROR_MANAGER = -2000,                             /**< Unknown ARMAVLINK_Manager error */
+    
+    ARMAVLINK_ERROR_FILE_GENERATOR = -3000,                      /**< Unknown ARMAVLINK_FileGenerator error */
+    
+    ARMAVLINK_ERROR_LIST_UTILS = -4000,                          /**< Unknown ARMAVLINK_ListUtils error */
+    
+    ARMAVLINK_ERROR_WAYPOINT_UTILS = -5000,                      /**< Unknown ARMAVLINK_WaypointUtils error */
+    ARMAVLINK_ERROR_WAYPOINT_UTILS_NOT_LINKED_COMMAND,           /**< Command not linked with Mavlink commands */
+    
+    ARMAVLINK_ERROR_FILE_PARSER = -6000,                         /**< Unknown ARMAVLINK_FileParser error */
+    ARMAVLINK_ERROR_FILE_PARSER_FILE_NOT_FOUND,                  /**< File to parse not found */
+    ARMAVLINK_ERROR_FILE_PARSER_WORD_NOT_EXPTECTED,              /**< A word was not expected during parsing */
 
 } eARMAVLINK_ERROR;
 
