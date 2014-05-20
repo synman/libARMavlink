@@ -150,7 +150,7 @@ eARMAVLINK_ERROR ARMAVLINK_FileGenerator_ResetSequences(waypoint_list_t *list, i
     
     int i;
     int size = ARMAVLINK_ListUtils_WaypointListGetSize(list);
-    for (int i = startIndex; i < size; i++)
+    for (i = startIndex; i < size; i++)
     {
         mavlink_mission_item_t *waypoint = ARMAVLINK_ListUtils_WaypointListGet(list, i);
         waypoint->seq = i;
