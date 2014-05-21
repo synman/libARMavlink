@@ -174,8 +174,6 @@ eARMAVLINK_ERROR ARMAVLINK_FileParser_ReadMavlinkCommand(ARMAVLINK_FileParser_t 
     float altitude;
     uint16_t seq;
     uint16_t command;
-    uint8_t target_system;
-    uint8_t target_component;
     uint8_t frame;
     uint8_t current;
     uint8_t autocontinue;
