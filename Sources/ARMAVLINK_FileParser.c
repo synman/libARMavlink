@@ -94,7 +94,7 @@ eARMAVLINK_ERROR ARMAVLINK_FileParser_Parse(ARMAVLINK_FileParser_t *fileParser, 
     // try to open the file
     if(error == ARMAVLINK_OK)
     {
-        file = fopen(filePath,"r");
+        file = fopen(filePath,"rb");
         if (file == NULL)
         {
             error = ARMAVLINK_ERROR_FILE_PARSER_FILE_NOT_FOUND;
@@ -118,7 +118,13 @@ eARMAVLINK_ERROR ARMAVLINK_FileParser_Parse(ARMAVLINK_FileParser_t *fileParser, 
         
         
         i++;
-    }    
+    }
+    
+    if (file != NULL)
+    {
+        fclose(file);
+    }
+    
     return error;
 }
 
@@ -294,20 +300,6 @@ eARMAVLINK_ERROR ARMAVLINK_FileParser_ReadMavlinkCommand(ARMAVLINK_FileParser_t 
         }
     }
     
-    // get the longitude
-    if (ARMAVLINK_OK == error)
-    {
-        token = strtok(NULL, "\t");
-        if (token != NULL)
-        {
-            longitude = atof(token);
-        }
-        else
-        {
-            error = ARMAVLINK_ERROR_FILE_PARSER_WORD_NOT_EXPTECTED;
-        }
-    }
-    
     // get the latitude
     if (ARMAVLINK_OK == error)
     {
@@ -315,6 +307,20 @@ eARMAVLINK_ERROR ARMAVLINK_FileParser_ReadMavlinkCommand(ARMAVLINK_FileParser_t 
         if (token != NULL)
         {
             latitude = atof(token);
+        }
+        else
+        {
+            error = ARMAVLINK_ERROR_FILE_PARSER_WORD_NOT_EXPTECTED;
+        }
+    }
+    
+    // get the longitude
+    if (ARMAVLINK_OK == error)
+    {
+        token = strtok(NULL, "\t");
+        if (token != NULL)
+        {
+            longitude = atof(token);
         }
         else
         {

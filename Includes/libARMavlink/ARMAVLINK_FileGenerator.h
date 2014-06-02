@@ -8,7 +8,7 @@
 #define _ARMAVLINK_FILEGENERATOR_h
 
 #include <libARMavlink/ARMAVLINK_Error.h>
-#include <mavlink/common/mavlink.h>
+#include <libmavlink/common/mavlink.h>
 
 /**
  * @brief ARMavlink file generator structure allows to manage the process of creating Mavlink files

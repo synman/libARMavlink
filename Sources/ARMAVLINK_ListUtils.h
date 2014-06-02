@@ -9,7 +9,7 @@
 
 #include <libARMavlink/ARMAVLINK_ListUtils.h>
 #include <libARMavlink/ARMAVLINK_Error.h>
-#include <mavlink/common/mavlink.h>
+#include <libmavlink/common/mavlink.h>
 
 /**
  * @brief Add a waypoint in the list

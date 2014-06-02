@@ -8,7 +8,7 @@
 #include "ARMAVLINK_WaypointUtils.h"
 
 // default waypoint values
-#define ARMAVLINK_WAYPOINT_UTILS_WAYPOINT_DEFAULT_RADIUS            0.5f    // in meters
+#define ARMAVLINK_WAYPOINT_UTILS_WAYPOINT_DEFAULT_RADIUS            0.0f    // in meters
 #define ARMAVLINK_WAYPOINT_UTILS_WAYPOINT_DEFAULT_TIME              0.0f    // in ms
 #define ARMAVLINK_WAYPOINT_UTILS_WAYPOINT_DEFAULT_ORBIT             0.0f
 #define ARMAVLINK_WAYPOINT_UTILS_WAYPOINT_DEFAULT_TARGET_SYSTEM     1

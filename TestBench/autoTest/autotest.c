@@ -278,35 +278,35 @@ eARMAVLINK_ERROR createTestWaypoints()
     // waypoint 1
     if (ARMAVLINK_OK == error)
     {
-        error = ARMAVLINK_WaypointUtils_CreateMavlinkMissionItem(&waypoint, 2.367990, 48.879007, 3.0, 0, MAV_CMD_NAV_WAYPOINT, 0);
+        error = ARMAVLINK_WaypointUtils_CreateMavlinkMissionItem(&waypoint, 48.879007, 2.367990, 3.0, 0, MAV_CMD_NAV_WAYPOINT, 0);
         ARMAVLINK_ListUtils_WaypointListAdd(inWaypointList, &waypoint);
     }
     
     // waypoint 2
     if (ARMAVLINK_OK == error)
     {
-        error = ARMAVLINK_WaypointUtils_CreateMavlinkMissionItem(&waypoint, 2.367467, 48.878931, 3.0, 0, MAV_CMD_NAV_WAYPOINT, 1);
+        error = ARMAVLINK_WaypointUtils_CreateMavlinkMissionItem(&waypoint, 48.878931, 2.367467, 3.0, 0, MAV_CMD_NAV_WAYPOINT, 1);
         ARMAVLINK_ListUtils_WaypointListAdd(inWaypointList, &waypoint);
     }
     
     // waypoint 3
     if (ARMAVLINK_OK == error)
     {
-        error = ARMAVLINK_WaypointUtils_CreateMavlinkMissionItem(&waypoint, 2.367518, 48.878800, 3.0, 0, MAV_CMD_NAV_WAYPOINT, 2);
+        error = ARMAVLINK_WaypointUtils_CreateMavlinkMissionItem(&waypoint, 48.878800, 2.367518, 3.0, 0, MAV_CMD_NAV_WAYPOINT, 2);
         ARMAVLINK_ListUtils_WaypointListAdd(inWaypointList, &waypoint);
     }
     
     // waypoint 4
     if (ARMAVLINK_OK == error)
     {
-        error = ARMAVLINK_WaypointUtils_CreateMavlinkMissionItem(&waypoint, 2.368044, 48.878770, 3.0, 0, MAV_CMD_NAV_WAYPOINT, 3);
+        error = ARMAVLINK_WaypointUtils_CreateMavlinkMissionItem(&waypoint, 48.878770, 2.368044, 3.0, 0, MAV_CMD_NAV_WAYPOINT, 3);
         ARMAVLINK_ListUtils_WaypointListAdd(inWaypointList, &waypoint);
     }
     
     // waypoint 5
     if (ARMAVLINK_OK == error)
     {
-        error = ARMAVLINK_WaypointUtils_CreateMavlinkMissionItem(&waypoint, 2.367990, 48.879007, 3.0, 0, MAV_CMD_NAV_WAYPOINT, 4);
+        error = ARMAVLINK_WaypointUtils_CreateMavlinkMissionItem(&waypoint, 48.879007, 2.367990, 3.0, 0, MAV_CMD_NAV_WAYPOINT, 4);
         ARMAVLINK_ListUtils_WaypointListAdd(inWaypointList, &waypoint);
     }
     

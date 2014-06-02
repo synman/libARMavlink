@@ -8,7 +8,7 @@
 #define _ARMAVLINK_WAYPOINT_UTILS_PRIVATE_H
 
 #include <libARMavlink/ARMAVLINK_Error.h>
-#include <mavlink/common/mavlink.h>
+#include <libmavlink/common/mavlink.h>
 
 /**
  * @brief Determine if two waypoints are equals

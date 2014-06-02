@@ -184,8 +184,8 @@ void ARMAVLINK_FileGenerator_CreateMavlinkFile(ARMAVLINK_FileGenerator_t *fileGe
                 waypoint->param2,
                 waypoint->param3,
                 waypoint->param4,
-                waypoint->y,
                 waypoint->x,
+                waypoint->y,
                 waypoint->z,
                 waypoint->autocontinue);
     }

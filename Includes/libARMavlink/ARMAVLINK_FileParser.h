@@ -9,7 +9,7 @@
 
 #include <libARMavlink/ARMAVLINK_Error.h>
 #include <libARMavlink/ARMAVLINK_ListUtils.h>
-#include <mavlink/common/mavlink.h>
+#include <libmavlink/common/mavlink.h>
 
 /**
  * @brief ARMavlink file parser structure allows to manage the process of parsing Mavlink files
