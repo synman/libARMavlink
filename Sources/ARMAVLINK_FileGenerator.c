@@ -192,31 +192,22 @@ void ARMAVLINK_FileGenerator_CreateMavlinkFile(ARMAVLINK_FileGenerator_t *fileGe
     fclose(file);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+waypoint_list_t *ARMAVLINK_FileGenerator_GetCurrentWaypointList(ARMAVLINK_FileGenerator_t *fileGenerator, eARMAVLINK_ERROR *err)
+{
+    eARMAVLINK_ERROR error = ARMAVLINK_OK;
+    
+    waypoint_list_t *listToReturn = NULL;
+    
+    if (fileGenerator == NULL)
+    {
+        error = ARMAVLINK_ERROR_BAD_PARAMETER;
+    }
+    
+    if (ARMAVLINK_OK == error)
+    {
+        listToReturn = fileGenerator->waypointList;
+    }
+    
+    return listToReturn;
+}
 

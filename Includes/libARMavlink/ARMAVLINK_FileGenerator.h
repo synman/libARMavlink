@@ -8,6 +8,7 @@
 #define _ARMAVLINK_FILEGENERATOR_h
 
 #include <libARMavlink/ARMAVLINK_Error.h>
+#include <libARMavlink/ARMAVLINK_ListUtils.h>
 #include <libmavlink/common/mavlink.h>
 
 /**
@@ -86,4 +87,11 @@ eARMAVLINK_ERROR ARMAVLINK_FileGenerator_DeleteWaypoint(ARMAVLINK_FileGenerator_
  */
 void ARMAVLINK_FileGenerator_CreateMavlinkFile(ARMAVLINK_FileGenerator_t *fileGenerator, const char *const filePath);
 
+/**
+ * @brief Get the current waypoint list
+ * @param fileGenerator : pointer on the file generator
+ * @param[out] err : pointer on the error output. Can be null
+ * @return the waypoint list
+*/
+waypoint_list_t *ARMAVLINK_FileGenerator_GetCurrentWaypointList(ARMAVLINK_FileGenerator_t *fileGenerator, eARMAVLINK_ERROR *err);
 #endif

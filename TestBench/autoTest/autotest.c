@@ -355,6 +355,7 @@ eARMAVLINK_ERROR addWaypointsToFileGenerator(ARMAVLINK_FileGenerator_t *fileGene
     eARMAVLINK_ERROR error = ARMAVLINK_OK;
     
     mavlink_mission_item_t *waypoint;
+    waypoint_list_t *currentList;
     
     int i;
     int nbPointInList = ARMAVLINK_ListUtils_WaypointListGetSize(inWaypointList);
@@ -364,6 +365,35 @@ eARMAVLINK_ERROR addWaypointsToFileGenerator(ARMAVLINK_FileGenerator_t *fileGene
     {
         waypoint = ARMAVLINK_ListUtils_WaypointListGet(inWaypointList, i);
         error = ARMAVLINK_FileGenerator_AddWaypoint(fileGenerator, waypoint->x, waypoint->y, waypoint->z, waypoint->param4, waypoint->command);
+    }
+    
+    
+    if (ARMAVLINK_OK == error)
+    {
+        currentList = ARMAVLINK_FileGenerator_GetCurrentWaypointList(fileGenerator, &error);
+    }
+    
+    if (ARMAVLINK_OK == error)
+    {
+        int nbPointInCurrentList = ARMAVLINK_ListUtils_WaypointListGetSize(currentList);
+        if (nbPointInList == nbPointInCurrentList)
+        {
+            mavlink_mission_item_t *waypointInCurrentList;
+            for (i = 0; (ARMAVLINK_OK == error) && (i < nbPointInList); i++)
+            {
+                waypoint = ARMAVLINK_ListUtils_WaypointListGet(inWaypointList, i);
+                waypointInCurrentList = ARMAVLINK_ListUtils_WaypointListGet(currentList, i);
+                if (ARMAVLINK_WaypointUtils_WaypointsAreEquals(waypoint, waypointInCurrentList) != 1)
+                {
+                    error = ARMAVLINK_ERROR_LIST_UTILS;
+                }
+            }
+        }
+        else
+        {
+            error = ARMAVLINK_ERROR_LIST_UTILS;
+            fprintf(stderr, "nb in list = %i", nbPointInCurrentList);
+        }
     }
     
     return error;
