@@ -21,7 +21,7 @@
 #include <libARMavlink/libARMavlink.h>
 
 #include "ARMAVLINK_ListUtils.h"
-#include "ARMAVLINK_WaypointUtils.h"
+#include "ARMAVLINK_MissionItemUtils.h"
 
 /* ****************************************
  *
@@ -38,7 +38,7 @@
  *           variable declarations :
  *
  **************************************** */
-waypoint_list_t *inWaypointList;
+mission_item_list_t *inMissionItemList;
 
 /* ****************************************
  *
@@ -52,15 +52,15 @@ waypoint_list_t *inWaypointList;
 eARMAVLINK_ERROR testUtils();
 
 /**
- * @brief Create a set of waypoints and store them in inWaypointList
+ * @brief Create a set of mission items and store them in inMissionItemList
  */
-eARMAVLINK_ERROR createTestWaypoints();
+eARMAVLINK_ERROR createTestMissionItems();
 
 /**
- * @brief test the generation of a mavlink file based on the waypoints stored in inWaypointList
+ * @brief test the generation of a mavlink file based on the mission items stored in inMissionItemList
  */
 eARMAVLINK_ERROR testFileGenerator();
-eARMAVLINK_ERROR addWaypointsToFileGenerator(ARMAVLINK_FileGenerator_t *fileGenerator);
+eARMAVLINK_ERROR addMissionItemsToFileGenerator(ARMAVLINK_FileGenerator_t *fileGenerator);
 
 /**
  * @brief test the parsing of the mavlink file written in the function testFileGenerator
@@ -83,8 +83,8 @@ int main(int argc, char *argv[])
     
     if (error == ARMAVLINK_OK)
     {
-        error = createTestWaypoints();
-        fprintf(stderr, "Create test waypoint : %s\n", ARMAVLINK_Error_ToString(error));
+        error = createTestMissionItems();
+        fprintf(stderr, "Create test mission item : %s\n", ARMAVLINK_Error_ToString(error));
     }
     
     if (error == ARMAVLINK_OK)
@@ -173,7 +173,7 @@ eARMAVLINK_ERROR testUtils()
     item4.current           = 36;
     item4.autocontinue      = 37;
     
-    waypoint_list_t *list = ARMAVLINK_ListUtils_WaypointListNew();
+    mission_item_list_t *list = ARMAVLINK_ListUtils_MissionItemListNew();
     if (list == NULL)
     {
         error = ARMAVLINK_ERROR_ALLOC;
@@ -182,9 +182,9 @@ eARMAVLINK_ERROR testUtils()
     if (error == ARMAVLINK_OK)
     {
         // list = [item1]
-        ARMAVLINK_ListUtils_WaypointListAdd(list, &item1);
-        if ((ARMAVLINK_ListUtils_WaypointListGetSize(list) != 1) ||
-            (ARMAVLINK_WaypointUtils_WaypointsAreEquals(&item1, ARMAVLINK_ListUtils_WaypointListGet(list, 0)) != 1))
+        ARMAVLINK_ListUtils_MissionItemListAdd(list, &item1);
+        if ((ARMAVLINK_ListUtils_MissionItemListGetSize(list) != 1) ||
+            (ARMAVLINK_MissionItemUtils_MissionItemsAreEquals(&item1, ARMAVLINK_ListUtils_MissionItemListGet(list, 0)) != 1))
         {
             error = ARMAVLINK_ERROR_LIST_UTILS;
         }
@@ -193,10 +193,10 @@ eARMAVLINK_ERROR testUtils()
     if (error == ARMAVLINK_OK)
     {
         // list = [item2, item1]
-        ARMAVLINK_ListUtils_WaypointListInsertWaypoint(list, &item2, 0);
-        if ((ARMAVLINK_ListUtils_WaypointListGetSize(list) != 2) ||
-            (ARMAVLINK_WaypointUtils_WaypointsAreEquals(&item2, ARMAVLINK_ListUtils_WaypointListGet(list, 0)) != 1) ||
-            (ARMAVLINK_WaypointUtils_WaypointsAreEquals(&item1, ARMAVLINK_ListUtils_WaypointListGet(list, 1)) != 1))
+        ARMAVLINK_ListUtils_MissionItemListInsertMissionItem(list, &item2, 0);
+        if ((ARMAVLINK_ListUtils_MissionItemListGetSize(list) != 2) ||
+            (ARMAVLINK_MissionItemUtils_MissionItemsAreEquals(&item2, ARMAVLINK_ListUtils_MissionItemListGet(list, 0)) != 1) ||
+            (ARMAVLINK_MissionItemUtils_MissionItemsAreEquals(&item1, ARMAVLINK_ListUtils_MissionItemListGet(list, 1)) != 1))
         {
             error = ARMAVLINK_ERROR_LIST_UTILS;
         }
@@ -206,11 +206,11 @@ eARMAVLINK_ERROR testUtils()
     if (error == ARMAVLINK_OK)
     {
         // list = [item2, item1, item3]
-        ARMAVLINK_ListUtils_WaypointListInsertWaypoint(list, &item3, 2);
-        if ((ARMAVLINK_ListUtils_WaypointListGetSize(list) != 3) ||
-            (ARMAVLINK_WaypointUtils_WaypointsAreEquals(&item2, ARMAVLINK_ListUtils_WaypointListGet(list, 0)) != 1) ||
-            (ARMAVLINK_WaypointUtils_WaypointsAreEquals(&item1, ARMAVLINK_ListUtils_WaypointListGet(list, 1)) != 1) ||
-            (ARMAVLINK_WaypointUtils_WaypointsAreEquals(&item3, ARMAVLINK_ListUtils_WaypointListGet(list, 2)) != 1))
+        ARMAVLINK_ListUtils_MissionItemListInsertMissionItem(list, &item3, 2);
+        if ((ARMAVLINK_ListUtils_MissionItemListGetSize(list) != 3) ||
+            (ARMAVLINK_MissionItemUtils_MissionItemsAreEquals(&item2, ARMAVLINK_ListUtils_MissionItemListGet(list, 0)) != 1) ||
+            (ARMAVLINK_MissionItemUtils_MissionItemsAreEquals(&item1, ARMAVLINK_ListUtils_MissionItemListGet(list, 1)) != 1) ||
+            (ARMAVLINK_MissionItemUtils_MissionItemsAreEquals(&item3, ARMAVLINK_ListUtils_MissionItemListGet(list, 2)) != 1))
         {
             error = ARMAVLINK_ERROR_LIST_UTILS;
         }
@@ -220,12 +220,12 @@ eARMAVLINK_ERROR testUtils()
     if (error == ARMAVLINK_OK)
     {
         // list = [item2, item1, item4, item3]
-        ARMAVLINK_ListUtils_WaypointListInsertWaypoint(list, &item4, 2);
-        if ((ARMAVLINK_ListUtils_WaypointListGetSize(list) != 4) ||
-            (ARMAVLINK_WaypointUtils_WaypointsAreEquals(&item2, ARMAVLINK_ListUtils_WaypointListGet(list, 0)) != 1) ||
-            (ARMAVLINK_WaypointUtils_WaypointsAreEquals(&item1, ARMAVLINK_ListUtils_WaypointListGet(list, 1)) != 1) ||
-            (ARMAVLINK_WaypointUtils_WaypointsAreEquals(&item4, ARMAVLINK_ListUtils_WaypointListGet(list, 2)) != 1) ||
-            (ARMAVLINK_WaypointUtils_WaypointsAreEquals(&item3, ARMAVLINK_ListUtils_WaypointListGet(list, 3)) != 1))
+        ARMAVLINK_ListUtils_MissionItemListInsertMissionItem(list, &item4, 2);
+        if ((ARMAVLINK_ListUtils_MissionItemListGetSize(list) != 4) ||
+            (ARMAVLINK_MissionItemUtils_MissionItemsAreEquals(&item2, ARMAVLINK_ListUtils_MissionItemListGet(list, 0)) != 1) ||
+            (ARMAVLINK_MissionItemUtils_MissionItemsAreEquals(&item1, ARMAVLINK_ListUtils_MissionItemListGet(list, 1)) != 1) ||
+            (ARMAVLINK_MissionItemUtils_MissionItemsAreEquals(&item4, ARMAVLINK_ListUtils_MissionItemListGet(list, 2)) != 1) ||
+            (ARMAVLINK_MissionItemUtils_MissionItemsAreEquals(&item3, ARMAVLINK_ListUtils_MissionItemListGet(list, 3)) != 1))
         {
             error = ARMAVLINK_ERROR_LIST_UTILS;
         }
@@ -235,11 +235,11 @@ eARMAVLINK_ERROR testUtils()
     if (error == ARMAVLINK_OK)
     {
         // list = [item2, item4, item3]
-        ARMAVLINK_ListUtils_WaypointListDeleteWaypoint(list, 1);
-        if ((ARMAVLINK_ListUtils_WaypointListGetSize(list) != 3) ||
-            (ARMAVLINK_WaypointUtils_WaypointsAreEquals(&item2, ARMAVLINK_ListUtils_WaypointListGet(list, 0)) != 1) ||
-            (ARMAVLINK_WaypointUtils_WaypointsAreEquals(&item4, ARMAVLINK_ListUtils_WaypointListGet(list, 1)) != 1) ||
-            (ARMAVLINK_WaypointUtils_WaypointsAreEquals(&item3, ARMAVLINK_ListUtils_WaypointListGet(list, 2)) != 1))
+        ARMAVLINK_ListUtils_MissionItemListDeleteMissionItem(list, 1);
+        if ((ARMAVLINK_ListUtils_MissionItemListGetSize(list) != 3) ||
+            (ARMAVLINK_MissionItemUtils_MissionItemsAreEquals(&item2, ARMAVLINK_ListUtils_MissionItemListGet(list, 0)) != 1) ||
+            (ARMAVLINK_MissionItemUtils_MissionItemsAreEquals(&item4, ARMAVLINK_ListUtils_MissionItemListGet(list, 1)) != 1) ||
+            (ARMAVLINK_MissionItemUtils_MissionItemsAreEquals(&item3, ARMAVLINK_ListUtils_MissionItemListGet(list, 2)) != 1))
         {
             error = ARMAVLINK_ERROR_LIST_UTILS;
         }
@@ -249,11 +249,11 @@ eARMAVLINK_ERROR testUtils()
     if (error == ARMAVLINK_OK)
     {
         // list = [item2, item1, item3]
-        ARMAVLINK_ListUtils_WaypointListReplaceWaypoint(list, &item1, 1);
-        if ((ARMAVLINK_ListUtils_WaypointListGetSize(list) != 3) ||
-            (ARMAVLINK_WaypointUtils_WaypointsAreEquals(&item2, ARMAVLINK_ListUtils_WaypointListGet(list, 0)) != 1) ||
-            (ARMAVLINK_WaypointUtils_WaypointsAreEquals(&item1, ARMAVLINK_ListUtils_WaypointListGet(list, 1)) != 1) ||
-            (ARMAVLINK_WaypointUtils_WaypointsAreEquals(&item3, ARMAVLINK_ListUtils_WaypointListGet(list, 2)) != 1))
+        ARMAVLINK_ListUtils_MissionItemListReplaceMissionItem(list, &item1, 1);
+        if ((ARMAVLINK_ListUtils_MissionItemListGetSize(list) != 3) ||
+            (ARMAVLINK_MissionItemUtils_MissionItemsAreEquals(&item2, ARMAVLINK_ListUtils_MissionItemListGet(list, 0)) != 1) ||
+            (ARMAVLINK_MissionItemUtils_MissionItemsAreEquals(&item1, ARMAVLINK_ListUtils_MissionItemListGet(list, 1)) != 1) ||
+            (ARMAVLINK_MissionItemUtils_MissionItemsAreEquals(&item3, ARMAVLINK_ListUtils_MissionItemListGet(list, 2)) != 1))
         {
             error = ARMAVLINK_ERROR_LIST_UTILS;
         }
@@ -263,51 +263,57 @@ eARMAVLINK_ERROR testUtils()
     return error;
 }
 
-eARMAVLINK_ERROR createTestWaypoints()
+eARMAVLINK_ERROR createTestMissionItems()
 {
-    mavlink_mission_item_t waypoint;
+    mavlink_mission_item_t missionItem;
     
     eARMAVLINK_ERROR error = ARMAVLINK_OK;
     
-    inWaypointList = ARMAVLINK_ListUtils_WaypointListNew();
-    if (inWaypointList == NULL)
+    inMissionItemList = ARMAVLINK_ListUtils_MissionItemListNew();
+    if (inMissionItemList == NULL)
     {
         error = ARMAVLINK_ERROR_ALLOC;
     }
     
-    // waypoint 1
+    // missionItem 1
     if (ARMAVLINK_OK == error)
     {
-        error = ARMAVLINK_WaypointUtils_CreateMavlinkMissionItem(&waypoint, 48.879007, 2.367990, 3.0, 0, MAV_CMD_NAV_WAYPOINT, 0);
-        ARMAVLINK_ListUtils_WaypointListAdd(inWaypointList, &waypoint);
+        error = ARMAVLINK_MissionItemUtils_CreateMavlinkNavWaypointMissionItem(&missionItem, 48.879007, 2.367990, 3.0, 0);
+        missionItem.seq = 0;
+        missionItem.current = 0;
+        ARMAVLINK_ListUtils_MissionItemListAdd(inMissionItemList, &missionItem);
     }
     
-    // waypoint 2
+    // missionItem 2
     if (ARMAVLINK_OK == error)
     {
-        error = ARMAVLINK_WaypointUtils_CreateMavlinkMissionItem(&waypoint, 48.878931, 2.367467, 3.0, 0, MAV_CMD_NAV_WAYPOINT, 1);
-        ARMAVLINK_ListUtils_WaypointListAdd(inWaypointList, &waypoint);
+        error = ARMAVLINK_MissionItemUtils_CreateMavlinkNavWaypointMissionItem(&missionItem, 48.878931, 2.367467, 3.0, 0);
+        missionItem.seq = 1;
+        ARMAVLINK_ListUtils_MissionItemListAdd(inMissionItemList, &missionItem);
     }
     
-    // waypoint 3
+    // missionItem 3
     if (ARMAVLINK_OK == error)
     {
-        error = ARMAVLINK_WaypointUtils_CreateMavlinkMissionItem(&waypoint, 48.878800, 2.367518, 3.0, 0, MAV_CMD_NAV_WAYPOINT, 2);
-        ARMAVLINK_ListUtils_WaypointListAdd(inWaypointList, &waypoint);
+        error = ARMAVLINK_MissionItemUtils_CreateMavlinkNavWaypointMissionItem(&missionItem, 48.878800, 2.367518, 3.0, 0);
+        missionItem.seq = 2;
+        ARMAVLINK_ListUtils_MissionItemListAdd(inMissionItemList, &missionItem);
     }
     
-    // waypoint 4
+    // missionItem 4
     if (ARMAVLINK_OK == error)
     {
-        error = ARMAVLINK_WaypointUtils_CreateMavlinkMissionItem(&waypoint, 48.878770, 2.368044, 3.0, 0, MAV_CMD_NAV_WAYPOINT, 3);
-        ARMAVLINK_ListUtils_WaypointListAdd(inWaypointList, &waypoint);
+        error = ARMAVLINK_MissionItemUtils_CreateMavlinkNavWaypointMissionItem(&missionItem, 48.878770, 2.368044, 3.0, 0);
+        missionItem.seq = 3;
+        ARMAVLINK_ListUtils_MissionItemListAdd(inMissionItemList, &missionItem);
     }
     
-    // waypoint 5
+    // missionItem 5
     if (ARMAVLINK_OK == error)
     {
-        error = ARMAVLINK_WaypointUtils_CreateMavlinkMissionItem(&waypoint, 48.879007, 2.367990, 3.0, 0, MAV_CMD_NAV_WAYPOINT, 4);
-        ARMAVLINK_ListUtils_WaypointListAdd(inWaypointList, &waypoint);
+        error = ARMAVLINK_MissionItemUtils_CreateMavlinkNavWaypointMissionItem(&missionItem, 48.879007, 2.367990, 3.0, 0);
+        missionItem.seq = 4;
+        ARMAVLINK_ListUtils_MissionItemListAdd(inMissionItemList, &missionItem);
     }
     
     return error;
@@ -323,8 +329,7 @@ eARMAVLINK_ERROR testFileGenerator()
         ARMAVLINK_FileGenerator_t *fileGenerator = ARMAVLINK_FileGenerator_New(&error);
         if(error == ARMAVLINK_OK)
         {
-            error = addWaypointsToFileGenerator(fileGenerator);
-            
+            error = addMissionItemsToFileGenerator(fileGenerator);
             if(error == ARMAVLINK_OK)
             {
                 ARMAVLINK_FileGenerator_CreateMavlinkFile(fileGenerator, AUTOTEST_OUTPUT_FILE_PATH);
@@ -350,40 +355,40 @@ eARMAVLINK_ERROR testFileGenerator()
     return error;
 }
 
-eARMAVLINK_ERROR addWaypointsToFileGenerator(ARMAVLINK_FileGenerator_t *fileGenerator)
+eARMAVLINK_ERROR addMissionItemsToFileGenerator(ARMAVLINK_FileGenerator_t *fileGenerator)
 {
     eARMAVLINK_ERROR error = ARMAVLINK_OK;
     
-    mavlink_mission_item_t *waypoint;
-    waypoint_list_t *currentList;
+    mavlink_mission_item_t *missionItem;
+    mission_item_list_t *currentList;
     
     int i;
-    int nbPointInList = ARMAVLINK_ListUtils_WaypointListGetSize(inWaypointList);
+    int nbPointInList = ARMAVLINK_ListUtils_MissionItemListGetSize(inMissionItemList);
 
-    // add all waypoints of inWaypointList
+    // add all missionItems of inMissionItemList
     for (i = 0; (ARMAVLINK_OK == error) && (i < nbPointInList); i++)
     {
-        waypoint = ARMAVLINK_ListUtils_WaypointListGet(inWaypointList, i);
-        error = ARMAVLINK_FileGenerator_AddWaypoint(fileGenerator, waypoint->x, waypoint->y, waypoint->z, waypoint->param4, waypoint->command);
+        missionItem = ARMAVLINK_ListUtils_MissionItemListGet(inMissionItemList, i);
+        error = ARMAVLINK_FileGenerator_AddMissionItem(fileGenerator, missionItem);
     }
     
     
     if (ARMAVLINK_OK == error)
     {
-        currentList = ARMAVLINK_FileGenerator_GetCurrentWaypointList(fileGenerator, &error);
+        currentList = ARMAVLINK_FileGenerator_GetCurrentMissionItemList(fileGenerator, &error);
     }
     
     if (ARMAVLINK_OK == error)
     {
-        int nbPointInCurrentList = ARMAVLINK_ListUtils_WaypointListGetSize(currentList);
+        int nbPointInCurrentList = ARMAVLINK_ListUtils_MissionItemListGetSize(currentList);
         if (nbPointInList == nbPointInCurrentList)
         {
-            mavlink_mission_item_t *waypointInCurrentList;
+            mavlink_mission_item_t *missionItemInCurrentList;
             for (i = 0; (ARMAVLINK_OK == error) && (i < nbPointInList); i++)
             {
-                waypoint = ARMAVLINK_ListUtils_WaypointListGet(inWaypointList, i);
-                waypointInCurrentList = ARMAVLINK_ListUtils_WaypointListGet(currentList, i);
-                if (ARMAVLINK_WaypointUtils_WaypointsAreEquals(waypoint, waypointInCurrentList) != 1)
+                missionItem = ARMAVLINK_ListUtils_MissionItemListGet(inMissionItemList, i);
+                missionItemInCurrentList = ARMAVLINK_ListUtils_MissionItemListGet(currentList, i);
+                if (ARMAVLINK_MissionItemUtils_MissionItemsAreEquals(missionItem, missionItemInCurrentList) != 1)
                 {
                     error = ARMAVLINK_ERROR_LIST_UTILS;
                 }
@@ -406,22 +411,22 @@ eARMAVLINK_ERROR testFileParser()
     ARMAVLINK_FileParser_t *fileParser = ARMAVLINK_FileParser_New(&error);
     if(error == ARMAVLINK_OK)
     {
-        waypoint_list_t *outWaypointList = ARMAVLINK_ListUtils_WaypointListNew();
-        if (outWaypointList == NULL)
+        mission_item_list_t *outMissionItemList = ARMAVLINK_ListUtils_MissionItemListNew();
+        if (outMissionItemList == NULL)
         {
             error = ARMAVLINK_ERROR_ALLOC;
         }
         
         if (error == ARMAVLINK_OK)
         {
-            error = ARMAVLINK_FileParser_Parse(fileParser, AUTOTEST_OUTPUT_FILE_PATH, outWaypointList);
+            error = ARMAVLINK_FileParser_Parse(fileParser, AUTOTEST_OUTPUT_FILE_PATH, outMissionItemList);
         }
         
         if (error == ARMAVLINK_OK)
         {
             int i;
-            int nbPointInList = ARMAVLINK_ListUtils_WaypointListGetSize(outWaypointList);
-            if (nbPointInList != ARMAVLINK_ListUtils_WaypointListGetSize(inWaypointList))
+            int nbPointInList = ARMAVLINK_ListUtils_MissionItemListGetSize(outMissionItemList);
+            if (nbPointInList != ARMAVLINK_ListUtils_MissionItemListGetSize(inMissionItemList))
             {
                 error = ARMAVLINK_ERROR_FILE_PARSER;
                 fprintf(stderr, "The list to write and the list to parse do not have the same size\n");
@@ -429,13 +434,13 @@ eARMAVLINK_ERROR testFileParser()
             
             for (i = 0; (ARMAVLINK_OK == error) && (i < nbPointInList); i++)
             {
-                mavlink_mission_item_t *outWaypoint = ARMAVLINK_ListUtils_WaypointListGet(outWaypointList, i);
-                mavlink_mission_item_t *inWaypoint = ARMAVLINK_ListUtils_WaypointListGet(inWaypointList, i);
+                mavlink_mission_item_t *outMissionItem = ARMAVLINK_ListUtils_MissionItemListGet(outMissionItemList, i);
+                mavlink_mission_item_t *inMissionItem = ARMAVLINK_ListUtils_MissionItemListGet(inMissionItemList, i);
                 
-                if (ARMAVLINK_WaypointUtils_WaypointsAreEquals(inWaypoint, outWaypoint) != 1)
+                if (ARMAVLINK_MissionItemUtils_MissionItemsAreEquals(inMissionItem, outMissionItem) != 1)
                 {
                     error = ARMAVLINK_ERROR_FILE_PARSER;
-                    fprintf(stderr, "The waypoint %i of the list to write and the parsed are not the same\n", i);
+                    fprintf(stderr, "The mission item %i of the list to write and the parsed are not the same\n", i);
                 }
             }
         }

@@ -16,15 +16,15 @@
  */
 struct ARMAVLINK_FileGenerator_t
 {
-    waypoint_list_t *waypointList;
+    mission_item_list_t *missionItemList;
 };
 
 /**
- * @brief Set again all the seq params of the waypoints starting at the given index of the list
+ * @brief Set again all the seq params of the mission items starting at the given index of the list
  * @param list : the list to iterate in
  * @param[in] startIndex : the starting index
  * @return ARMAVLINK_OK if operation went well, the error description otherwise
  */
-eARMAVLINK_ERROR ARMAVLINK_FileGenerator_ResetSequences(waypoint_list_t *list, int startIndex);
+eARMAVLINK_ERROR ARMAVLINK_FileGenerator_ResetSequences(mission_item_list_t *list, int startIndex);
 
 #endif

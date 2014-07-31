@@ -39,11 +39,11 @@ void ARMAVLINK_FileParser_Delete(ARMAVLINK_FileParser_t **fileParser);
  * @brief Parse a Mavlink file and store it in a list
  * @param fileParser : pointer on the file parser
  * @param[in] filePath : the path of the file to parse
- * @param[out] waypointList : a list of all waypoints
+ * @param[out] missionItemList : a list of all mission items
  * @return ARMAVLINK_OK if parsing went well, the enum description of the error otherwise
- * @see waypoint_list_t
+ * @see mission_item_list_t
  */
-eARMAVLINK_ERROR ARMAVLINK_FileParser_Parse(ARMAVLINK_FileParser_t *fileParser, const char *const filePath, waypoint_list_t *waypointList);
+eARMAVLINK_ERROR ARMAVLINK_FileParser_Parse(ARMAVLINK_FileParser_t *fileParser, const char *const filePath, mission_item_list_t *missionItemList);
 
 
 #endif

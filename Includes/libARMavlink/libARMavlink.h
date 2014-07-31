@@ -13,5 +13,6 @@
 #include <libARMavlink/ARMAVLINK_FileGenerator.h>
 #include <libARMavlink/ARMAVLINK_FileParser.h>
 #include <libARMavlink/ARMAVLINK_ListUtils.h>
+#include <libARMavlink/ARMAVLINK_MissionItemUtils.h>
 #include <libmavlink/common/mavlink.h>
 #endif // _ARMAVLINK_H_

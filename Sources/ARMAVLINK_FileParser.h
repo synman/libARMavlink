@@ -28,12 +28,12 @@ struct ARMAVLINK_FileParser_t
 eARMAVLINK_ERROR ARMAVLINK_FileParser_ReadFirstLine(ARMAVLINK_FileParser_t *fileParser, char *line);
 
 /**
- * @brief Read a mavlink command and add the command to the waypoint list
+ * @brief Read a mavlink command and add the command to the mission item list
  * @param fileParser : Pointer on the file parser
  * @param[in|out] line : the line
- * @param[out] waypointList : the list to add the waypoint
+ * @param[out] missionItemList : the list to add the mission item
  * @warning : the line param will be modified by this function
  */
-eARMAVLINK_ERROR ARMAVLINK_FileParser_ReadMavlinkCommand(ARMAVLINK_FileParser_t *fileParser, char *line, waypoint_list_t *waypointList);
+eARMAVLINK_ERROR ARMAVLINK_FileParser_ReadMavlinkCommand(ARMAVLINK_FileParser_t *fileParser, char *line, mission_item_list_t *missionItemList);
 
 #endif

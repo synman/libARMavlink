@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <libARSAL/ARSAL_Print.h>
 #include "ARMAVLINK_FileParser.h"
-#include "ARMAVLINK_WaypointUtils.h"
+#include "ARMAVLINK_MissionItemUtils.h"
 #include <string.h>
 
 /* ***************************************
@@ -78,7 +78,7 @@ void ARMAVLINK_FileParser_Delete(ARMAVLINK_FileParser_t **fileParser)
     }
 }
 
-eARMAVLINK_ERROR ARMAVLINK_FileParser_Parse(ARMAVLINK_FileParser_t *fileParser, const char *const filePath, waypoint_list_t *waypointList)
+eARMAVLINK_ERROR ARMAVLINK_FileParser_Parse(ARMAVLINK_FileParser_t *fileParser, const char *const filePath, mission_item_list_t *missionItemList)
 {
     eARMAVLINK_ERROR error = ARMAVLINK_OK;
     
@@ -86,7 +86,7 @@ eARMAVLINK_ERROR ARMAVLINK_FileParser_Parse(ARMAVLINK_FileParser_t *fileParser, 
     char line[ARMAVLINK_FILE_PARSER_MAX_CHAR_IN_LINE];
     
     // check params
-    if (waypointList == NULL || filePath == NULL)
+    if (missionItemList == NULL || filePath == NULL)
     {
         error = ARMAVLINK_ERROR_BAD_PARAMETER;
     }
@@ -113,7 +113,7 @@ eARMAVLINK_ERROR ARMAVLINK_FileParser_Parse(ARMAVLINK_FileParser_t *fileParser, 
         }
         else
         {
-            ARMAVLINK_FileParser_ReadMavlinkCommand(fileParser, line, waypointList);
+            ARMAVLINK_FileParser_ReadMavlinkCommand(fileParser, line, missionItemList);
         }
         
         
@@ -167,7 +167,7 @@ eARMAVLINK_ERROR ARMAVLINK_FileParser_ReadFirstLine(ARMAVLINK_FileParser_t *file
     return error;
 }
 
-eARMAVLINK_ERROR ARMAVLINK_FileParser_ReadMavlinkCommand(ARMAVLINK_FileParser_t *fileParser, char *line, waypoint_list_t *waypointList)
+eARMAVLINK_ERROR ARMAVLINK_FileParser_ReadMavlinkCommand(ARMAVLINK_FileParser_t *fileParser, char *line, mission_item_list_t *missionItemList)
 {
     char *token;
     
@@ -184,7 +184,7 @@ eARMAVLINK_ERROR ARMAVLINK_FileParser_ReadMavlinkCommand(ARMAVLINK_FileParser_t 
     uint8_t current;
     uint8_t autocontinue;
     
-    mavlink_mission_item_t waypoint;
+    mavlink_mission_item_t missionItem;
     
     eARMAVLINK_ERROR error = ARMAVLINK_OK;
     
@@ -358,14 +358,14 @@ eARMAVLINK_ERROR ARMAVLINK_FileParser_ReadMavlinkCommand(ARMAVLINK_FileParser_t 
     
     if (ARMAVLINK_OK == error)
     {
-        error = ARMAVLINK_WaypointUtils_CreateMavlinkMissionItemWithAllParams(&waypoint, param1, param2, param3, param4,
+        error = ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(&missionItem, param1, param2, param3, param4,
                                                                               latitude, longitude, altitude, command,
                                                                               seq, frame, current, autocontinue);
     }
     
     if (ARMAVLINK_OK == error)
     {
-        ARMAVLINK_ListUtils_WaypointListAdd(waypointList, &waypoint);
+        ARMAVLINK_ListUtils_MissionItemListAdd(missionItemList, &missionItem);
     }
     
     return error;

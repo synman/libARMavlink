@@ -25,8 +25,8 @@ typedef enum
     
     ARMAVLINK_ERROR_LIST_UTILS = -4000,                          /**< Unknown ARMAVLINK_ListUtils error */
     
-    ARMAVLINK_ERROR_WAYPOINT_UTILS = -5000,                      /**< Unknown ARMAVLINK_WaypointUtils error */
-    ARMAVLINK_ERROR_WAYPOINT_UTILS_NOT_LINKED_COMMAND,           /**< Command not linked with Mavlink commands */
+    ARMAVLINK_ERROR_MISSION_ITEM_UTILS = -5000,                  /**< Unknown ARMAVLINK_MissionItemUtils error */
+    ARMAVLINK_ERROR_MISSION_ITEM_UTILS_NOT_LINKED_COMMAND,       /**< Command not linked with Mavlink commands */
     
     ARMAVLINK_ERROR_FILE_PARSER = -6000,                         /**< Unknown ARMAVLINK_FileParser error */
     ARMAVLINK_ERROR_FILE_PARSER_FILE_NOT_FOUND,                  /**< File to parse not found */

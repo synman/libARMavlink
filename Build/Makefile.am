@@ -9,6 +9,7 @@ HEADER_FILES                                                =   ../Includes/libA
                                                                 ../Includes/libARMavlink/ARMAVLINK_FileParser.h           \
                                                                 ../Includes/libARMavlink/ARMAVLINK_Manager.h              \
                                                                 ../Includes/libARMavlink/ARMAVLINK_ListUtils.h            \
+                                                                ../Includes/libARMavlink/ARMAVLINK_MissionItemUtils.h     \
                                                                 ../Includes/libARMavlink/ARMAVLINK_Error.h
 
 # The sources to add to the library and to add to the source distribution
@@ -21,8 +22,8 @@ SOURCE_FILES                                                =   $(HEADER_FILES) 
                                                                 ../Sources/ARMAVLINK_Manager.h                            \
                                                                 ../Sources/ARMAVLINK_ListUtils.c                          \
                                                                 ../Sources/ARMAVLINK_ListUtils.h                          \
-                                                                ../Sources/ARMAVLINK_WaypointUtils.c                      \
-                                                                ../Sources/ARMAVLINK_WaypointUtils.h                      \
+                                                                ../Sources/ARMAVLINK_MissionItemUtils.c                   \
+                                                                ../Sources/ARMAVLINK_MissionItemUtils.h                   \
                                                                 ../Sources/ARMAVLINK_Error.c
 
 # The library names to build (note we are building static and shared libs)
@@ -40,7 +41,7 @@ endif
 
 check_PROGRAMS                                              =   libarmavlink_autoTest
 
-libarmavlink_autoTest_SOURCES                            =   ../TestBench/autoTest/autoTest.c
+libarmavlink_autoTest_SOURCES                            =   ../TestBench/autoTest/autotest.c
 
 if DEBUG_MODE
 libarmavlink_autoTest_LDADD                              =   -larsal_dbg                 \

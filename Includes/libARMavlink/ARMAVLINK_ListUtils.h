@@ -10,42 +10,42 @@
 #include <libmavlink/common/mavlink.h>
 
 /**
- * @brief a list of waypoints.
+ * @brief a list of mission item.
  * @warning the list allocates first a small amount of memory. Then, when you add too much points, it will reallocate memory.
  * @see mavlink_mission_item_t
  */
-typedef struct waypoint_list_t waypoint_list_t;
+typedef struct mission_item_list_t mission_item_list_t;
 
 /**
- * @brief Create a new waypoint list
+ * @brief Create a new mission item list
  * @warning This function allocate memory
- * @post ARMAVLINK_Utils_WaypointListDelete() must be called to delete the list and free the memory allocated.
+ * @post ARMAVLINK_ListUtils_MissionItemListDelete() must be called to delete the list and free the memory allocated.
  * @return Pointer on the new list
- * @see ARMAVLINK_Utils_WaypointListNew()
+ * @see ARMAVLINK_ListUtils_MissionItemListDelete()
  */
-waypoint_list_t* ARMAVLINK_ListUtils_WaypointListNew(void);
+mission_item_list_t* ARMAVLINK_ListUtils_MissionItemListNew(void);
 
 /**
- * @brief Get a waypoint in the list according to its index
+ * @brief Get a mission item in the list according to its index
  * @param list : a pointer on the list
- * @param[in] the index of the waypoint to return
- * @retval a pointer on the waypoint if it exists, otherwise null 
+ * @param[in] the index of the mission item to return
+ * @retval a pointer on the mission item if it exists, otherwise null
  * @see mavlink_mission_item_t in mavlink_msg_mission_item.h
  */
-mavlink_mission_item_t* ARMAVLINK_ListUtils_WaypointListGet(const waypoint_list_t *const list, const uint16_t index);
+mavlink_mission_item_t* ARMAVLINK_ListUtils_MissionItemListGet(const mission_item_list_t *const list, const uint16_t index);
 
 /**
- * @brief Get the current size of the list (the number of waypoints which are actually in the list)
+ * @brief Get the current size of the list (the number of mission item which are actually in the list)
  * @param list : a pointer on the list
  * @retval the size of the list
  */
-int ARMAVLINK_ListUtils_WaypointListGetSize(const waypoint_list_t *const list);
+int ARMAVLINK_ListUtils_MissionItemListGetSize(const mission_item_list_t *const list);
 
 /**
  * @brief delete the list
  * @warning This function free memory
  * @param[inout] list : address of the pointer on the list
  */
-void ARMAVLINK_ListUtils_WaypointListDelete(waypoint_list_t **list);
+void ARMAVLINK_ListUtils_MissionItemListDelete(mission_item_list_t **list);
 
 #endif

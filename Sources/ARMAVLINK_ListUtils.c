@@ -16,20 +16,20 @@
 #define ARMAVLINK_LIST_UTILS_LIST_SIZE          32
 #define ARMAVLINK_LIST_UTILS_LIST_MAX_INDEX     ((uint16_t) -1)
 
-struct waypoint_list_t
+struct mission_item_list_t
 {
     int size;
     int alloc_size;
-    mavlink_mission_item_t *waypoints;
+    mavlink_mission_item_t *missionItems;
 };
 
-waypoint_list_t* ARMAVLINK_ListUtils_WaypointListNew(void)
+mission_item_list_t* ARMAVLINK_ListUtils_MissionItemListNew(void)
 {
-    waypoint_list_t *list = (waypoint_list_t *)malloc(sizeof(waypoint_list_t));
+    mission_item_list_t *list = (mission_item_list_t *)malloc(sizeof(mission_item_list_t));
     if(list != NULL)
     {
-        list->waypoints = (mavlink_mission_item_t *)malloc(sizeof(mavlink_mission_item_t) * ARMAVLINK_LIST_UTILS_LIST_SIZE);
-        if(list->waypoints != NULL)
+        list->missionItems = (mavlink_mission_item_t *)malloc(sizeof(mavlink_mission_item_t) * ARMAVLINK_LIST_UTILS_LIST_SIZE);
+        if(list->missionItems != NULL)
         {
             list->alloc_size = ARMAVLINK_LIST_UTILS_LIST_SIZE;
             list->size = 0;
@@ -44,47 +44,47 @@ waypoint_list_t* ARMAVLINK_ListUtils_WaypointListNew(void)
     return list;
 }
 
-uint16_t ARMAVLINK_ListUtils_WaypointListAdd(waypoint_list_t *list, const mavlink_mission_item_t *const waypoint)
+uint16_t ARMAVLINK_ListUtils_MissionItemListAdd(mission_item_list_t *list, const mavlink_mission_item_t *const missionItem)
 {
     uint16_t index = ARMAVLINK_LIST_UTILS_LIST_MAX_INDEX;
     
-    if(list != NULL && waypoint != NULL)
+    if(list != NULL && missionItem != NULL)
     {
         if(list->size == list->alloc_size)
         {
             list->alloc_size += ARMAVLINK_LIST_UTILS_LIST_SIZE;
-            mavlink_mission_item_t *new_points = (mavlink_mission_item_t *)realloc(list->waypoints, sizeof(mavlink_mission_item_t) * list->alloc_size);
-            if(new_points != NULL)
+            mavlink_mission_item_t *new_mission_items = (mavlink_mission_item_t *)realloc(list->missionItems, sizeof(mavlink_mission_item_t) * list->alloc_size);
+            if(new_mission_items != NULL)
             {
-                list->waypoints = new_points;
+                list->missionItems = new_mission_items;
             }
         }
         
         index = list->size;
-        memcpy(&(list->waypoints[index]), waypoint, sizeof(mavlink_mission_item_t));
+        memcpy(&(list->missionItems[index]), missionItem, sizeof(mavlink_mission_item_t));
         list->size++;
     }
     
     return index;
 }
 
-mavlink_mission_item_t* ARMAVLINK_ListUtils_WaypointListGet(const waypoint_list_t *const list, const uint16_t index)
+mavlink_mission_item_t* ARMAVLINK_ListUtils_MissionItemListGet(const mission_item_list_t *const list, const uint16_t index)
 {
     mavlink_mission_item_t *retval = NULL;
     if(list != NULL && index < list->size && index >= 0)
     {
-        retval = &list->waypoints[index];
+        retval = &list->missionItems[index];
     }
     
     return retval;
 }
 
-int ARMAVLINK_ListUtils_WaypointListGetSize(const waypoint_list_t *const list)
+int ARMAVLINK_ListUtils_MissionItemListGetSize(const mission_item_list_t *const list)
 {
     return list->size;
 }
 
-eARMAVLINK_ERROR ARMAVLINK_ListUtils_WaypointListDeleteWaypoint(waypoint_list_t *list, const uint16_t index)
+eARMAVLINK_ERROR ARMAVLINK_ListUtils_MissionItemListDeleteMissionItem(mission_item_list_t *list, const uint16_t index)
 {
     eARMAVLINK_ERROR error = ARMAVLINK_OK;
     
@@ -92,10 +92,10 @@ eARMAVLINK_ERROR ARMAVLINK_ListUtils_WaypointListDeleteWaypoint(waypoint_list_t 
         (index < list->size) &&
         (index >= 0))
     {
-        int nbWaypointsToCopy = (list->size - index) - 1;
-        if (nbWaypointsToCopy > 0)
+        int nbMissionItemsToCopy = (list->size - index) - 1;
+        if (nbMissionItemsToCopy > 0)
         {
-            memcpy(&(list->waypoints[index]), &(list->waypoints[index+1]), nbWaypointsToCopy * sizeof(mavlink_mission_item_t));
+            memcpy(&(list->missionItems[index]), &(list->missionItems[index+1]), nbMissionItemsToCopy * sizeof(mavlink_mission_item_t));
         }
         list->size--;
     }
@@ -107,31 +107,31 @@ eARMAVLINK_ERROR ARMAVLINK_ListUtils_WaypointListDeleteWaypoint(waypoint_list_t 
     return error;
 }
 
-eARMAVLINK_ERROR ARMAVLINK_ListUtils_WaypointListInsertWaypoint(waypoint_list_t *list, const mavlink_mission_item_t *const waypoint, const uint16_t index)
+eARMAVLINK_ERROR ARMAVLINK_ListUtils_MissionItemListInsertMissionItem(mission_item_list_t *list, const mavlink_mission_item_t *const missionItem, const uint16_t index)
 {
     eARMAVLINK_ERROR error = ARMAVLINK_OK;
     
     if ((list != NULL) &&
         (index <= list->size) &&
         (index >= 0) &&
-        (waypoint != NULL))
+        (missionItem != NULL))
     {
         if(list->size == list->alloc_size)
         {
             list->alloc_size += ARMAVLINK_LIST_UTILS_LIST_SIZE;
-            mavlink_mission_item_t *new_points = (mavlink_mission_item_t *)realloc(list->waypoints, sizeof(mavlink_mission_item_t) * list->alloc_size);
-            if(new_points != NULL)
+            mavlink_mission_item_t *new_mission_items = (mavlink_mission_item_t *)realloc(list->missionItems, sizeof(mavlink_mission_item_t) * list->alloc_size);
+            if(new_mission_items != NULL)
             {
-                list->waypoints = new_points;
+                list->missionItems = new_mission_items;
             }
         }
         
-        int nbWaypointsToCopy = (list->size - index);
-        if (nbWaypointsToCopy > 0)
+        int nbMissionItemsToCopy = (list->size - index);
+        if (nbMissionItemsToCopy > 0)
         {
-            memcpy(&(list->waypoints[index+1]), &(list->waypoints[index]), nbWaypointsToCopy * sizeof(mavlink_mission_item_t));
+            memcpy(&(list->missionItems[index+1]), &(list->missionItems[index]), nbMissionItemsToCopy * sizeof(mavlink_mission_item_t));
         }
-        memcpy(&(list->waypoints[index]), waypoint, sizeof(mavlink_mission_item_t));
+        memcpy(&(list->missionItems[index]), missionItem, sizeof(mavlink_mission_item_t));
         list->size++;
     }
     else
@@ -143,16 +143,16 @@ eARMAVLINK_ERROR ARMAVLINK_ListUtils_WaypointListInsertWaypoint(waypoint_list_t 
 
 }
 
-eARMAVLINK_ERROR ARMAVLINK_ListUtils_WaypointListReplaceWaypoint(waypoint_list_t *list, const mavlink_mission_item_t *const waypoint, const uint16_t index)
+eARMAVLINK_ERROR ARMAVLINK_ListUtils_MissionItemListReplaceMissionItem(mission_item_list_t *list, const mavlink_mission_item_t *const missionItem, const uint16_t index)
 {
     eARMAVLINK_ERROR error = ARMAVLINK_OK;
     
     if ((list != NULL) &&
         (index <= list->size) &&
         (index >= 0) &&
-        (waypoint != NULL))
+        (missionItem != NULL))
     {
-        memcpy(&(list->waypoints[index]), waypoint, sizeof(mavlink_mission_item_t));
+        memcpy(&(list->missionItems[index]), missionItem, sizeof(mavlink_mission_item_t));
     }
     else
     {
@@ -162,9 +162,9 @@ eARMAVLINK_ERROR ARMAVLINK_ListUtils_WaypointListReplaceWaypoint(waypoint_list_t
     return error;
 }
 
-void ARMAVLINK_ListUtils_WaypointListDelete(waypoint_list_t **list)
+void ARMAVLINK_ListUtils_MissionItemListDelete(mission_item_list_t **list)
 {
-    waypoint_list_t *listPtr = NULL;
+    mission_item_list_t *listPtr = NULL;
     
     if (list)
     {
@@ -172,10 +172,10 @@ void ARMAVLINK_ListUtils_WaypointListDelete(waypoint_list_t **list)
         
         if (listPtr)
         {
-            if(listPtr->waypoints != NULL)
+            if(listPtr->missionItems != NULL)
             {
-                free(listPtr->waypoints);
-                listPtr->waypoints = NULL;
+                free(listPtr->missionItems);
+                listPtr->missionItems = NULL;
             }
             
             free (listPtr);
