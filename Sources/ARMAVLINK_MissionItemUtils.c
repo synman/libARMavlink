@@ -195,3 +195,113 @@ eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkChangeSpeedMissionItem(
     
     return error;
 }
+
+/* MAV_CMD_VIDEO_START_CAPTURE */
+eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkVideoStartCapture(mavlink_mission_item_t* missionItem, int cameraId, float framesPerSeconds, float resolution)
+{
+    // TODO: remove this message
+    ARSAL_PRINT (ARSAL_PRINT_ERROR, ARMAVLINK_MISSION_ITEM_UTILS_TAG, "Watch out, the MAV_CMD_VIDEO_START_CAPTURE item creation has not been tested yet");
+    return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
+                                                                                    missionItem,
+                                                                                    cameraId,
+                                                                                    framesPerSeconds,
+                                                                                    resolution,
+                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                                    MAV_CMD_VIDEO_START_CAPTURE,
+                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
+                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
+                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
+                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
+                                                                                    );
+}
+
+/* MAV_CMD_VIDEO_STOP_CAPTURE */
+eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkVideoStopCapture(mavlink_mission_item_t* missionItem)
+{
+    // TODO: remove this message
+    ARSAL_PRINT (ARSAL_PRINT_ERROR, ARMAVLINK_MISSION_ITEM_UTILS_TAG, "Watch out, the MAV_CMD_VIDEO_STOP_CAPTURE item creation has not been tested yet");
+    return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
+                                                                                    missionItem,
+                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                                    MAV_CMD_VIDEO_STOP_CAPTURE,
+                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
+                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
+                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
+                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
+                                                                                    );
+}
+
+/* MAV_CMD_IMAGE_START_CAPTURE */
+eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkImageStartCapture(mavlink_mission_item_t* missionItem,float period,float imagesCount,float resolution)
+{
+    // TODO: remove this message
+    ARSAL_PRINT (ARSAL_PRINT_ERROR, ARMAVLINK_MISSION_ITEM_UTILS_TAG, "Watch out, the MAV_CMD_IMAGE_START_CAPTURE item creation has not been tested yet");
+    return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
+                                                                            missionItem,
+                                                                            period,
+                                                                            imagesCount,
+                                                                            resolution,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            MAV_CMD_IMAGE_START_CAPTURE,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
+                                                                            );
+}
+
+/* MAV_CMD_IMAGE_STOP_CAPTURE */
+eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkImageStopCapture(mavlink_mission_item_t* missionItem)
+{
+    // TODO: remove this message
+    ARSAL_PRINT (ARSAL_PRINT_ERROR, ARMAVLINK_MISSION_ITEM_UTILS_TAG, "Watch out, the MAV_CMD_IMAGE_STOP_CAPTURE item creation has not been tested yet");
+    return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
+                                                                            missionItem,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            MAV_CMD_IMAGE_STOP_CAPTURE,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
+                                                                            );
+}
+
+/* MAV_CMD_PANORAMA_CREATE */
+eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkCreatePanorama(mavlink_mission_item_t* missionItem,float horizontalAngle,float verticalAngle,float horizontalRotationSpeed)
+{
+    // TODO: remove this message
+    ARSAL_PRINT (ARSAL_PRINT_ERROR, ARMAVLINK_MISSION_ITEM_UTILS_TAG, "Watch out, the MAV_CMD_PANORAMA_CREATE item creation has not been tested yet");
+    return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
+                                                                            missionItem,
+                                                                            horizontalAngle,
+                                                                            verticalAngle,
+                                                                            horizontalRotationSpeed,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            MAV_CMD_PANORAMA_CREATE,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
+                                                                            );
+}
