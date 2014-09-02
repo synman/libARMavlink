@@ -702,6 +702,7 @@
                    <param index="1">Viewing angle horizontal of the panorama</param>
                    <param index="2">Viewing angle vertical of panorama</param>
                    <param index="3">Speed of the horizontal rotation </param>
+                   <param index="4">Speed of the vertical rotation </param>
                </entry>
                
 
