@@ -95,7 +95,7 @@ eARMAVLINK_ERROR ARMAVLINK_ListUtils_MissionItemListDeleteMissionItem(mission_it
         int nbMissionItemsToCopy = (list->size - index) - 1;
         if (nbMissionItemsToCopy > 0)
         {
-            memcpy(&(list->missionItems[index]), &(list->missionItems[index+1]), nbMissionItemsToCopy * sizeof(mavlink_mission_item_t));
+            memmove(&(list->missionItems[index]), &(list->missionItems[index+1]), nbMissionItemsToCopy * sizeof(mavlink_mission_item_t));
         }
         list->size--;
     }
@@ -129,7 +129,7 @@ eARMAVLINK_ERROR ARMAVLINK_ListUtils_MissionItemListInsertMissionItem(mission_it
         int nbMissionItemsToCopy = (list->size - index);
         if (nbMissionItemsToCopy > 0)
         {
-            memcpy(&(list->missionItems[index+1]), &(list->missionItems[index]), nbMissionItemsToCopy * sizeof(mavlink_mission_item_t));
+            memmove(&(list->missionItems[index+1]), &(list->missionItems[index]), nbMissionItemsToCopy * sizeof(mavlink_mission_item_t));
         }
         memcpy(&(list->missionItems[index]), missionItem, sizeof(mavlink_mission_item_t));
         list->size++;
