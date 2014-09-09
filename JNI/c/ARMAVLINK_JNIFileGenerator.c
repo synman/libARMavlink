@@ -31,6 +31,10 @@ int FileGenerator_Instance_Count = 0;
 
 #define ARMAVLINK_JNIMAVLINK_TAG "ARMAVLINK_JNIFileGenerator" /** tag used by the print of the file */
 
+int Load_ARMavlink_Java_Exception(JNIEnv *env);
+void DeLoad_ARMavlink_Java_Exception(JNIEnv *env);
+void Throw_Mavlink_Exception(JNIEnv *env, eARMAVLINK_ERROR nativeError);
+
 JNIEXPORT jlong JNICALL
 Java_com_parrot_arsdk_armavlink_ARMavlinkFileGenerator_nativeNew (JNIEnv *env, jobject obj)
 {

@@ -18,7 +18,7 @@ public class ARMavlinkMissionItemList
      * ARMavlinkMissionItemList constructor
      * Can't be Instantiated by user
      */
-    private ARMavlinkMissionItemList ()
+    public ARMavlinkMissionItemList ()
     {
         nativeMissionItemList = nativeMissionItemListNew();
     }
@@ -32,6 +32,11 @@ public class ARMavlinkMissionItemList
         if(itemListPtr != 0){
             nativeMissionItemList = itemListPtr;
         } 
+    }
+
+    public long getNativePointre()
+    {
+        return nativeMissionItemList;
     }
 
     /**
@@ -67,7 +72,10 @@ public class ARMavlinkMissionItemList
      */
     public void dispose()
     {
-        //NO dispose, il will be deleted when the file generator was deleted
+        if(nativeMissionItemList != 0) {
+            nativeMissionItemListDelete(nativeMissionItemList);
+            nativeMissionItemList = 0;
+        }
     }
 
 }

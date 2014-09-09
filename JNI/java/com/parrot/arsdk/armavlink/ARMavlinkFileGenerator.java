@@ -26,6 +26,20 @@ public class ARMavlinkFileGenerator
         nativeFileGenerator = nativeNew();
     }
 
+    public ARMAVLINK_ERROR_ENUM addMissionItemList(ARMavlinkMissionItemList missionList)
+    {
+        ARMAVLINK_ERROR_ENUM error = ARMAVLINK_ERROR_ENUM.ARMAVLINK_OK;
+
+        for(int i = 0; i < missionList.getSize(); i++)
+        {
+            error = addMissionItem(missionList.getMissionItem(i));
+            if(error != ARMAVLINK_ERROR_ENUM.ARMAVLINK_OK)
+                break;
+        }
+
+        return error;
+    }
+
     /**
      * Add a {@link ARMavlinkMissionItem} to the File Generator list
      * @param missionItem the mission item to add
