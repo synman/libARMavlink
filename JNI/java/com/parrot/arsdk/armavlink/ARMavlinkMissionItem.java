@@ -425,8 +425,18 @@ public class ARMavlinkMissionItem
         } 
     }
 
-    public float getParam1() {
+    public float getParam1() 
+    {
         return param1;
+    }
+
+    public float getParam1FromNative() 
+    {
+        float retVal = -1;
+        if(nativeMissionItem != 0){
+            retVal = nativeGetParam1(nativeMissionItem);
+        }
+        return retVal;
     }
 
     public void setParam1(float param1) {
@@ -441,6 +451,15 @@ public class ARMavlinkMissionItem
         return param2;
     }
 
+    public float getParam2FromNative() 
+    {
+        float retVal = -1;
+        if(nativeMissionItem != 0){
+            retVal = nativeGetParam2(nativeMissionItem);
+        }
+        return retVal;
+    }
+
     public void setParam2(float param2) {
         if(nativeMissionItem !=0)
         {
@@ -451,6 +470,15 @@ public class ARMavlinkMissionItem
 
     public float getParam3() {
         return param3;
+    }
+
+    public float getParam3FromNative() 
+    {
+        float retVal = -1;
+        if(nativeMissionItem != 0){
+            retVal = nativeGetParam3(nativeMissionItem);
+        }
+        return retVal;
     }
 
     public void setParam3(float param3) {
@@ -465,6 +493,15 @@ public class ARMavlinkMissionItem
         return param4;
     }
 
+    public float getParam4FromNative() 
+    {
+        float retVal = -1;
+        if(nativeMissionItem != 0){
+            retVal = nativeGetParam4(nativeMissionItem);
+        }
+        return retVal;
+    }
+
     public void setParam4(float param4) {
         if(nativeMissionItem !=0)
         {
@@ -475,6 +512,15 @@ public class ARMavlinkMissionItem
 
     public float getX() {
         return x;
+    }
+
+    public float getXFromNative() 
+    {
+        float retVal = -1;
+        if(nativeMissionItem != 0){
+            retVal = nativeGetX(nativeMissionItem);
+        }
+        return retVal;
     }
 
     public void setX(float x) {
@@ -489,6 +535,15 @@ public class ARMavlinkMissionItem
         return y;
     }
 
+    public float getYFromNative() 
+    {
+        float retVal = -1;
+        if(nativeMissionItem != 0){
+            retVal = nativeGetY(nativeMissionItem);
+        }
+        return retVal;
+    }
+
     public void setY(float y) {
         if(nativeMissionItem !=0)
         {
@@ -499,6 +554,15 @@ public class ARMavlinkMissionItem
 
     public float getZ() {
         return z;
+    }
+
+    public float getZFromNative() 
+    {
+        float retVal = -1;
+        if(nativeMissionItem != 0){
+            retVal = nativeGetZ(nativeMissionItem);
+        }
+        return retVal;
     }
 
     public void setZ(float z) {
