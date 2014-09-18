@@ -40,6 +40,30 @@ public class ARMavlinkFileGenerator
         return error;
     }
 
+    public ARMAVLINK_ERROR_ENUM removeAllMissionItem()
+    {
+        ARMAVLINK_ERROR_ENUM error = ARMAVLINK_ERROR_ENUM.ARMAVLINK_OK;
+        int size = 0;
+        try 
+        {
+            size = GetCurrentMissionItemList().getSize();
+        }
+        catch (ARMavlinkException e) 
+        {
+            e.printStackTrace();
+        }
+        if(size > 0)
+        {
+            for(int i = 0; i < size; i++)
+            {
+                error = deleteMissionItem(0);
+                if(error != ARMAVLINK_ERROR_ENUM.ARMAVLINK_OK)
+                break;
+            }
+        }
+        return error;
+    }
+
     /**
      * Add a {@link ARMavlinkMissionItem} to the File Generator list
      * @param missionItem the mission item to add
