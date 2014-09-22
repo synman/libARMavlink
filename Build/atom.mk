@@ -11,7 +11,9 @@ LOCAL_DESCRIPTION := ARSDK Mavlink
 
 LOCAL_EXPORT_LDLIBS := -larmavlink
 
-LOCAL_DEPENDS_HEADERS := libmavlink 
+LOCAL_LIBRARIES := libARSAL
+
+LOCAL_DEPENDS_HEADERS := libmavlink
 # Autotools variable
 LOCAL_AUTOTOOLS_CONFIGURE_ARGS := --with-libARSALInstallDir="" --enable-debug-commands
 
