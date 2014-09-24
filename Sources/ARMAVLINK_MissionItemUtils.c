@@ -104,8 +104,8 @@ eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkNavWaypointMissionItem(
 {
     return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
                                                                             missionItem,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_WAYPOINT_DEFAULT_RADIUS,
                                                                             ARMAVLINK_MISSION_ITEM_UTILS_WAYPOINT_DEFAULT_TIME,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_WAYPOINT_DEFAULT_RADIUS,
                                                                             ARMAVLINK_MISSION_ITEM_UTILS_WAYPOINT_DEFAULT_ORBIT,
                                                                             yaw,
                                                                             latitude,
