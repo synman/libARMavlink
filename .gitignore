@@ -1,0 +1,10 @@
+/JNI/java/com/parrot/arsdk/armavlink/ARMAVLINK_ERROR_ENUM.java
+/Sources/ARMAVLINK_Error.c
+Build/INSTALL
+Build/Makefile.in
+Build/aclocal.m4
+Build/autom4te.cache/
+Build/config.h.in
+Build/config/
+Build/configure
+Build/m4/
