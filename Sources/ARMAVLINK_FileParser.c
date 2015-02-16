@@ -139,13 +139,12 @@ eARMAVLINK_ERROR ARMAVLINK_FileParser_Parse(ARMAVLINK_FileParser_t *fileParser, 
         // the first line is the qgc description
         if (i == 0)
         {
-            ARMAVLINK_FileParser_ReadFirstLine(fileParser, line);
+            error = ARMAVLINK_FileParser_ReadFirstLine(fileParser, line);
         }
         else
         {
-            ARMAVLINK_FileParser_ReadMavlinkCommand(fileParser, line, missionItemList);
+            error = ARMAVLINK_FileParser_ReadMavlinkCommand(fileParser, line, missionItemList);
         }
-        
         
         i++;
     }
