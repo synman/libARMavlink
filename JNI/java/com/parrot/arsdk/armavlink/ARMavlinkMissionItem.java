@@ -47,7 +47,7 @@ public class ARMavlinkMissionItem
     private static native int nativeCreateMavlinkVideoStopCapture(long nativeItem);
     private static native int nativeCreateMavlinkImageStartCapture(long nativeItem, float period,float imagesCount,float resolution);
     private static native int nativeCreateMavlinkImageStopCapture(long nativeItem);
-    private static native int nativeCreateMavlinkCreatePanorama(long nativeItem, float horizontalAngle,float verticalAngle,float horizontalRotationSpeed);
+    private static native int nativeCreateMavlinkCreatePanorama(long nativeItem, float horizontalAngle, float verticalAngle, float horizontalRotationSpeed, float verticalRotationSpeed);
 
     private native long nativeNew();
     private native long nativeDelete(long nativeItem);
@@ -402,10 +402,10 @@ public class ARMavlinkMissionItem
      * @param horizontalRotationSpeed (saved in param3)
      * @return {@link ARMavlinkMissionItem} mission item
      */
-    public static ARMavlinkMissionItem CreateMavlinkCreatePanoramaMissionItem(float horizontalAngle, float verticalAngle, float horizontalRotationSpeed)
+    public static ARMavlinkMissionItem CreateMavlinkCreatePanoramaMissionItem(float horizontalAngle, float verticalAngle, float horizontalRotationSpeed, float verticalRotationSpeed)
     {
         ARMavlinkMissionItem missionItem = new ARMavlinkMissionItem();
-        int value = nativeCreateMavlinkCreatePanorama(missionItem.getNativePointre(), horizontalAngle, verticalAngle, horizontalRotationSpeed);
+        int value = nativeCreateMavlinkCreatePanorama(missionItem.getNativePointre(), horizontalAngle, verticalAngle, horizontalRotationSpeed, verticalRotationSpeed);
 
         ARMAVLINK_ERROR_ENUM error = ARMAVLINK_ERROR_ENUM.getFromValue(value);
 

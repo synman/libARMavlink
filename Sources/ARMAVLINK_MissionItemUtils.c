@@ -315,7 +315,7 @@ eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkImageStopCapture(mavlin
 }
 
 /* MAV_CMD_PANORAMA_CREATE */
-eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkCreatePanorama(mavlink_mission_item_t* missionItem,float horizontalAngle,float verticalAngle,float horizontalRotationSpeed)
+eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkCreatePanorama(mavlink_mission_item_t* missionItem,float horizontalAngle,float verticalAngle,float horizontalRotationSpeed,float verticalRotationSpeed)
 {
     // TODO: remove this message
     ARSAL_PRINT (ARSAL_PRINT_ERROR, ARMAVLINK_MISSION_ITEM_UTILS_TAG, "Watch out, the MAV_CMD_PANORAMA_CREATE item creation has not been tested yet");
@@ -324,7 +324,7 @@ eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkCreatePanorama(mavlink_
                                                                             horizontalAngle,
                                                                             verticalAngle,
                                                                             horizontalRotationSpeed,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            verticalRotationSpeed,
                                                                             ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
                                                                             ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
                                                                             ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
