@@ -314,6 +314,28 @@ eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkImageStopCapture(mavlin
                                                                             );
 }
 
+/* MAV_CMD_CONDITION_DELAY */
+eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkDelay(mavlink_mission_item_t* missionItem,float duration)
+{
+    // TODO: remove this message
+    ARSAL_PRINT (ARSAL_PRINT_ERROR, ARMAVLINK_MISSION_ITEM_UTILS_TAG, "Watch out, the MAV_CMD_CONDITION_DELAY item creation has not been tested yet");
+    return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
+                                                                            missionItem,
+                                                                            duration,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            MAV_CMD_CONDITION_DELAY,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
+                                                                            );
+}
+
 /* MAV_CMD_PANORAMA_CREATE */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkCreatePanorama(mavlink_mission_item_t* missionItem,float horizontalAngle,float verticalAngle,float horizontalRotationSpeed,float verticalRotationSpeed)
 {
