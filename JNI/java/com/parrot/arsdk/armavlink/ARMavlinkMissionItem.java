@@ -48,6 +48,7 @@ public class ARMavlinkMissionItem
     private static native int nativeCreateMavlinkImageStartCapture(long nativeItem, float period,float imagesCount,float resolution);
     private static native int nativeCreateMavlinkImageStopCapture(long nativeItem);
     private static native int nativeCreateMavlinkCreatePanorama(long nativeItem, float horizontalAngle, float verticalAngle, float horizontalRotationSpeed, float verticalRotationSpeed);
+    private static native int nativeCreateMavlinkDelay(long nativeItem, float delayDuration);
 
     private native long nativeNew();
     private native long nativeDelete(long nativeItem);
@@ -343,9 +344,8 @@ public class ARMavlinkMissionItem
         }
         return missionItem;
     }
-
     /**
-     * create a ARMavlinkMissionItem of Command MAV_CMD_IMAGE_START_CAPTURE with the given/default params 
+     * create a ARMavlinkMissionItem of Command MAV_CMD_IMAGE_START_CAPTURE with the given/default params
      * @param period (saved in param1)
      * @param imagesCount (saved in param2)
      * @param resolution (saved in param3)
@@ -355,6 +355,29 @@ public class ARMavlinkMissionItem
     {
         ARMavlinkMissionItem missionItem = new ARMavlinkMissionItem();
         int value = nativeCreateMavlinkImageStartCapture(missionItem.getNativePointre(), period, imagesCount, resolution);
+        ARMAVLINK_ERROR_ENUM error = ARMAVLINK_ERROR_ENUM.getFromValue(value);
+        if(error == ARMAVLINK_ERROR_ENUM.ARMAVLINK_OK)
+        {
+            missionItem.updateFromNative();
+        }
+        else
+        {
+            ARSALPrint.e (TAG, "Create Mavlink Mission Item Error : "+ error.toString());
+            missionItem.dispose();
+            missionItem = null;
+        }
+        return missionItem;
+    }
+
+    /**
+     * create a ARMavlinkMissionItem of Command MAV_CMD_CONDITION_DELAY with the given/default params
+     * @param durationDelay (saved in param1)
+     * @return {@link ARMavlinkMissionItem} mission item
+     */
+    public static ARMavlinkMissionItem CreateMavlinkDelay(float durationDelay)
+    {
+        ARMavlinkMissionItem missionItem = new ARMavlinkMissionItem();
+        int value = nativeCreateMavlinkDelay(missionItem.getNativePointre(), durationDelay);
 
         ARMAVLINK_ERROR_ENUM error = ARMAVLINK_ERROR_ENUM.getFromValue(value);
 

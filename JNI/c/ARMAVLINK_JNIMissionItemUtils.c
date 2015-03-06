@@ -147,6 +147,14 @@ Java_com_parrot_arsdk_armavlink_ARMavlinkMissionItem_nativeCreateMavlinkCreatePa
     return ARMAVLINK_MissionItemUtils_CreateMavlinkCreatePanorama(item, horizontalAngle, verticalAngle, horizontalRotationSpeed, verticalRotationSpeed);
 }
 
+JNIEXPORT jint JNICALL
+Java_com_parrot_arsdk_armavlink_ARMavlinkMissionItem_nativeCreateMavlinkDelay (JNIEnv *env, jclass class, jlong missionItemPtr, jfloat delayDuration)
+{
+    mavlink_mission_item_t *item = (mavlink_mission_item_t*) (intptr_t) missionItemPtr;
+    ARSAL_PRINT(ARSAL_PRINT_DEBUG, ARMAVLINK_JNIMAVLINK_TAG, "native - CreateMavlinkCreatePanorama");
+    return ARMAVLINK_MissionItemUtils_CreateMavlinkDelay(item, delayDuration);
+}
+
 /*****************************************
  *
  *             Setters
