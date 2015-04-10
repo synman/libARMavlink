@@ -63,13 +63,11 @@ CCASFLAGS+="$LOCAL_CFLAGS"
 # add libARxxx deps
 
 AR_DEPENDS([libARSAL], [Y], [libARSAL/ARSAL.h])
+AR_DEPENDS([mavlink], [Y], [mavlink/common/mavlink.h], [N], [Y])
 
 ##########################################################################
 # Check headers
 ##########################################################################
-
-AC_CHECK_HEADERS([libavcodec/avcodec.h libavformat/avformat.h libswscale/swscale.h], ,
-	AC_MSG_WARN(The FFMPEG support is disabled ! ))
 
 ##########################################################################
 # Checks for programs.
