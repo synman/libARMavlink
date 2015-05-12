@@ -60,50 +60,46 @@
 ARMAVLINK_FileParser_t* ARMAVLINK_FileParser_New(eARMAVLINK_ERROR *error)
 {
     ARMAVLINK_FileParser_t *fileParser = NULL;
-    eARMAVLINK_ERROR err = ARMAVLINK_OK;
-    
-    if(err == ARMAVLINK_OK)
+    if (!error)
     {
-        /* Create the file parser */
-        fileParser = malloc (sizeof (ARMAVLINK_FileParser_t));
-        if (fileParser == NULL)
-        {
-            err = ARMAVLINK_ERROR_ALLOC;
-        }
+        goto finish;
     }
-    
-    /* delete the file parser if an error occurred */
-    if (err != ARMAVLINK_OK)
+    *error = ARMAVLINK_OK;
+
+    /* Create the file parser */
+    fileParser = malloc (sizeof (ARMAVLINK_FileParser_t));
+    if (fileParser == NULL)
     {
-        ARSAL_PRINT (ARSAL_PRINT_ERROR, ARMAVLINK_FILE_PARSER_TAG, "error: %s", ARMAVLINK_Error_ToString (err));
-        ARMAVLINK_FileParser_Delete (&fileParser);
+        *error = ARMAVLINK_ERROR_ALLOC;
+        ARSAL_PRINT (ARSAL_PRINT_ERROR, ARMAVLINK_FILE_PARSER_TAG, "error: %s", ARMAVLINK_Error_ToString (*error));
+        goto finish;
     }
-    
-    /* return the error */
-    if (error != NULL)
-    {
-        *error = err;
-    }
-    
+    fileParser->mavlinkVersion = NULL;
+
+finish:
     return fileParser;
 }
 
 void ARMAVLINK_FileParser_Delete(ARMAVLINK_FileParser_t **fileParser)
 {
     ARMAVLINK_FileParser_t *fileParserPtr = NULL;
-    
+
     if (fileParser)
     {
         fileParserPtr = *fileParser;
-        
+
         // Uninitialize here
-        
+        if (fileParserPtr->mavlinkVersion)
+        {
+            free (fileParserPtr->mavlinkVersion);
+            fileParserPtr->mavlinkVersion = NULL;
+        }
         if (fileParserPtr)
         {
             free (fileParserPtr);
             fileParserPtr = NULL;
         }
-        
+
         *fileParser = NULL;
     }
 }
@@ -111,26 +107,25 @@ void ARMAVLINK_FileParser_Delete(ARMAVLINK_FileParser_t **fileParser)
 eARMAVLINK_ERROR ARMAVLINK_FileParser_Parse(ARMAVLINK_FileParser_t *fileParser, const char *const filePath, mission_item_list_t *missionItemList)
 {
     eARMAVLINK_ERROR error = ARMAVLINK_OK;
-    
+
     FILE *file;
     char line[ARMAVLINK_FILE_PARSER_MAX_CHAR_IN_LINE];
-    
+
     // check params
-    if (missionItemList == NULL || filePath == NULL)
+    if (missionItemList == NULL || filePath == NULL || fileParser == NULL)
     {
         error = ARMAVLINK_ERROR_BAD_PARAMETER;
+        goto finish;
     }
-    
+
     // try to open the file
-    if(error == ARMAVLINK_OK)
+    file = fopen(filePath,"rb");
+    if (file == NULL)
     {
-        file = fopen(filePath,"rb");
-        if (file == NULL)
-        {
-            error = ARMAVLINK_ERROR_FILE_PARSER_FILE_NOT_FOUND;
-        }
+        error = ARMAVLINK_ERROR_FILE_PARSER_FILE_NOT_FOUND;
+        goto finish;
     }
-    
+
     // read the file
     int i = 0;
     while ((ARMAVLINK_OK == error) &&
@@ -145,61 +140,45 @@ eARMAVLINK_ERROR ARMAVLINK_FileParser_Parse(ARMAVLINK_FileParser_t *fileParser, 
         {
             error = ARMAVLINK_FileParser_ReadMavlinkCommand(fileParser, line, missionItemList);
         }
-        
+
         i++;
     }
-    
+
     if (file != NULL)
     {
         fclose(file);
     }
-    
+
+finish:
     return error;
 }
 
 eARMAVLINK_ERROR ARMAVLINK_FileParser_ReadFirstLine(ARMAVLINK_FileParser_t *fileParser, char *line)
 {
     eARMAVLINK_ERROR error = ARMAVLINK_OK;
-    
     char *token;
-    
-    token = strtok(line, " ");
-    if (strcmp(token, ARMAVLINK_FILE_PARSER_QGC_WORD) != 0)
+    char qgc_word[ARMAVLINK_FILE_PARSER_MAX_CHAR_IN_LINE];
+    char wpl_word[ARMAVLINK_FILE_PARSER_MAX_CHAR_IN_LINE];
+    char filename_word[ARMAVLINK_FILE_PARSER_MAX_CHAR_IN_LINE];
+    if (sscanf(line, "%s %s %s", qgc_word, wpl_word, filename_word) != 3)
     {
         error = ARMAVLINK_ERROR_FILE_PARSER_WORD_NOT_EXPTECTED;
+        goto finish;
     }
-    
-    if (error == ARMAVLINK_OK)
-    {
-        // use NULL to reuse the last string
-        token = strtok(NULL, " ");
-        if (strcmp(token, ARMAVLINK_FILE_PARSER_WPL_WORD) != 0)
-        {
-            error = ARMAVLINK_ERROR_FILE_PARSER_WORD_NOT_EXPTECTED;
-        }
-    }
-    
-    if (error == ARMAVLINK_OK)
-    {
-        token = strtok(line, " ");
-        if (token != NULL)
-        {
-            fileParser->mavlinkVersion = malloc(sizeof(char) * strlen(token));
-            strcpy(fileParser->mavlinkVersion, token);
-        }
-        else
-        {
-            error = ARMAVLINK_ERROR_FILE_PARSER_WORD_NOT_EXPTECTED;
-        }
-    }
-    
+    qgc_word[ARMAVLINK_FILE_PARSER_MAX_CHAR_IN_LINE-1] = '\0';
+    wpl_word[ARMAVLINK_FILE_PARSER_MAX_CHAR_IN_LINE-1] = '\0';
+    filename_word[ARMAVLINK_FILE_PARSER_MAX_CHAR_IN_LINE-1] = '\0';
+
+    fileParser->mavlinkVersion = malloc(sizeof(char) * strlen(filename_word));
+    strcpy(fileParser->mavlinkVersion, filename_word);
+
+finish:
     return error;
 }
 
 eARMAVLINK_ERROR ARMAVLINK_FileParser_ReadMavlinkCommand(ARMAVLINK_FileParser_t *fileParser, char *line, mission_item_list_t *missionItemList)
 {
     char *token;
-    
     float param1;
     float param2;
     float param3;
@@ -212,191 +191,43 @@ eARMAVLINK_ERROR ARMAVLINK_FileParser_ReadMavlinkCommand(ARMAVLINK_FileParser_t 
     uint8_t frame;
     uint8_t current;
     uint8_t autocontinue;
-    
+
     mavlink_mission_item_t missionItem;
-    
+
     eARMAVLINK_ERROR error = ARMAVLINK_OK;
-    
+
     // <INDEX> <CURRENT WP> <COORD FRAME> <COMMAND> <PARAM1> <PARAM2> <PARAM3> <PARAM4> <PARAM5/X/LONGITUDE> <PARAM6/Y/LATITUDE> <PARAM7/Z/ALTITUDE> <AUTOCONTINUE>
     // where each space is a tabulation
-    
-    // get the index
-    token = strtok(line, "\t");
-    if (token != NULL)
-    {
-        seq = atoi(token);
-    }
-    else
+    if (sscanf (line, "%d\t" "%d\t" "%d\t" "%d\t" "%f\t" "%f\t" "%f\t" "%f\t"
+                            "%f\t" "%f\t" "%f\t" "%d \n",
+                            &seq,
+                            &current,
+                            &frame,
+                            &command,
+                            &param1,
+                            &param2,
+                            &param3,
+                            &param4,
+                            &latitude,
+                            &longitude,
+                            &altitude,
+                            &autocontinue) != 12)
     {
         error = ARMAVLINK_ERROR_FILE_PARSER_WORD_NOT_EXPTECTED;
+        goto finish;
     }
-    
-    // get the current
-    if (ARMAVLINK_OK == error)
-    {
-        token = strtok(NULL, "\t");
-        if (token != NULL)
-        {
-            current = atoi(token);
-        }
-        else
-        {
-            error = ARMAVLINK_ERROR_FILE_PARSER_WORD_NOT_EXPTECTED;
-        }
-    }
-    
-    // get the frame
-    if (ARMAVLINK_OK == error)
-    {
-        token = strtok(NULL, "\t");
-        if (token != NULL)
-        {
-            frame = atoi(token);
-        }
-        else
-        {
-            error = ARMAVLINK_ERROR_FILE_PARSER_WORD_NOT_EXPTECTED;
-        }
-    }
-    
-    // get the command
-    if (ARMAVLINK_OK == error)
-    {
-        token = strtok(NULL, "\t");
-        if (token != NULL)
-        {
-            command = atoi(token);
-        }
-        else
-        {
-            error = ARMAVLINK_ERROR_FILE_PARSER_WORD_NOT_EXPTECTED;
-        }
-    }
-    
-    // get the param1
-    if (ARMAVLINK_OK == error)
-    {
-        token = strtok(NULL, "\t");
-        if (token != NULL)
-        {
-            param1 = atof(token);
-        }
-        else
-        {
-            error = ARMAVLINK_ERROR_FILE_PARSER_WORD_NOT_EXPTECTED;
-        }
-    }
-    
-    // get the param2
-    if (ARMAVLINK_OK == error)
-    {
-        token = strtok(NULL, "\t");
-        if (token != NULL)
-        {
-            param2 = atof(token);
-        }
-        else
-        {
-            error = ARMAVLINK_ERROR_FILE_PARSER_WORD_NOT_EXPTECTED;
-        }
-    }
-    
-    // get the param3
-    if (ARMAVLINK_OK == error)
-    {
-        token = strtok(NULL, "\t");
-        if (token != NULL)
-        {
-            param3 = atof(token);
-        }
-        else
-        {
-            error = ARMAVLINK_ERROR_FILE_PARSER_WORD_NOT_EXPTECTED;
-        }
-    }
-    
-    // get the param4
-    if (ARMAVLINK_OK == error)
-    {
-        token = strtok(NULL, "\t");
-        if (token != NULL)
-        {
-            param4 = atof(token);
-        }
-        else
-        {
-            error = ARMAVLINK_ERROR_FILE_PARSER_WORD_NOT_EXPTECTED;
-        }
-    }
-    
-    // get the latitude
-    if (ARMAVLINK_OK == error)
-    {
-        token = strtok(NULL, "\t");
-        if (token != NULL)
-        {
-            latitude = atof(token);
-        }
-        else
-        {
-            error = ARMAVLINK_ERROR_FILE_PARSER_WORD_NOT_EXPTECTED;
-        }
-    }
-    
-    // get the longitude
-    if (ARMAVLINK_OK == error)
-    {
-        token = strtok(NULL, "\t");
-        if (token != NULL)
-        {
-            longitude = atof(token);
-        }
-        else
-        {
-            error = ARMAVLINK_ERROR_FILE_PARSER_WORD_NOT_EXPTECTED;
-        }
-    }
-    
-    // get the altitude
-    if (ARMAVLINK_OK == error)
-    {
-        token = strtok(NULL, "\t");
-        if (token != NULL)
-        {
-            altitude = atof(token);
-        }
-        else
-        {
-            error = ARMAVLINK_ERROR_FILE_PARSER_WORD_NOT_EXPTECTED;
-        }
-    }
-    
-    // get the autocontinue
-    if (ARMAVLINK_OK == error)
-    {
-        token = strtok(NULL, "\t");
-        if (token != NULL)
-        {
-            autocontinue = atoi(token);
-        }
-        else
-        {
-            error = ARMAVLINK_ERROR_FILE_PARSER_WORD_NOT_EXPTECTED;
-        }
-    }
-    
-    if (ARMAVLINK_OK == error)
-    {
-        error = ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(&missionItem, param1, param2, param3, param4,
+
+    error = ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(&missionItem, param1, param2, param3, param4,
                                                                               latitude, longitude, altitude, command,
                                                                               seq, frame, current, autocontinue);
-    }
-    
-    if (ARMAVLINK_OK == error)
+    if (ARMAVLINK_OK != error)
     {
-        ARMAVLINK_ListUtils_MissionItemListAdd(missionItemList, &missionItem);
+        goto finish;
     }
-    
+
+    ARMAVLINK_ListUtils_MissionItemListAdd(missionItemList, &missionItem);
+
+finish:
     return error;
 }
 
