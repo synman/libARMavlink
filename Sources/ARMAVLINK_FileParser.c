@@ -186,11 +186,11 @@ eARMAVLINK_ERROR ARMAVLINK_FileParser_ReadMavlinkCommand(ARMAVLINK_FileParser_t 
     float longitude;
     float latitude;
     float altitude;
-    uint16_t seq;
-    uint16_t command;
-    uint8_t frame;
-    uint8_t current;
-    uint8_t autocontinue;
+    int seq;
+    int command;
+    int frame;
+    int current;
+    int autocontinue;
 
     mavlink_mission_item_t missionItem;
 
@@ -198,8 +198,7 @@ eARMAVLINK_ERROR ARMAVLINK_FileParser_ReadMavlinkCommand(ARMAVLINK_FileParser_t 
 
     // <INDEX> <CURRENT WP> <COORD FRAME> <COMMAND> <PARAM1> <PARAM2> <PARAM3> <PARAM4> <PARAM5/X/LONGITUDE> <PARAM6/Y/LATITUDE> <PARAM7/Z/ALTITUDE> <AUTOCONTINUE>
     // where each space is a tabulation
-    if (sscanf (line, "%d\t" "%d\t" "%d\t" "%d\t" "%f\t" "%f\t" "%f\t" "%f\t"
-                            "%f\t" "%f\t" "%f\t" "%d \n",
+    if (sscanf (line, "%i\t%i\t%i\t%i\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%i\n",
                             &seq,
                             &current,
                             &frame,
