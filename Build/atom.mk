@@ -15,7 +15,7 @@ LOCAL_LIBRARIES := libARSAL
 
 LOCAL_DEPENDS_HEADERS := libmavlink
 # Autotools variable
-LOCAL_AUTOTOOLS_CONFIGURE_ARGS := --with-libARSALInstallDir="" --enable-debug-commands
+LOCAL_AUTOTOOLS_CONFIGURE_ARGS := --with-libARSALInstallDir="" --with-mavlinkInstallDir="" --enable-debug-commands
 
 ifeq ("$(TARGET_PBUILD_FORCE_STATIC)","1")
 LOCAL_AUTOTOOLS_CONFIGURE_ARGS += --disable-shared
