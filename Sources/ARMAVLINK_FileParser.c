@@ -82,26 +82,26 @@ finish:
 
 void ARMAVLINK_FileParser_Delete(ARMAVLINK_FileParser_t **fileParser)
 {
-    ARMAVLINK_FileParser_t *fileParserPtr = NULL;
-
-    if (fileParser)
+    if (fileParser == NULL || *fileParser == NULL)
     {
-        fileParserPtr = *fileParser;
-
-        // Uninitialize here
-        if (fileParserPtr->mavlinkVersion)
-        {
-            free (fileParserPtr->mavlinkVersion);
-            fileParserPtr->mavlinkVersion = NULL;
-        }
-        if (fileParserPtr)
-        {
-            free (fileParserPtr);
-            fileParserPtr = NULL;
-        }
-
-        *fileParser = NULL;
+        return;
     }
+    
+    ARMAVLINK_FileParser_t *fileParserPtr = NULL;
+    
+    fileParserPtr = *fileParser;
+    
+    // Uninitialize here
+    if (fileParserPtr->mavlinkVersion)
+    {
+        free (fileParserPtr->mavlinkVersion);
+        fileParserPtr->mavlinkVersion = NULL;
+    }
+    
+    free (fileParserPtr);
+    fileParserPtr = NULL;
+    
+    *fileParser = NULL;
 }
 
 eARMAVLINK_ERROR ARMAVLINK_FileParser_Parse(ARMAVLINK_FileParser_t *fileParser, const char *const filePath, mission_item_list_t *missionItemList)
