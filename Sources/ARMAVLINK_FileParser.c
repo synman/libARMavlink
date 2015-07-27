@@ -127,21 +127,18 @@ eARMAVLINK_ERROR ARMAVLINK_FileParser_Parse(ARMAVLINK_FileParser_t *fileParser, 
     }
 
     // read the file
-    int i = 0;
+    // read the first line (the qgc description)
+    if ((ARMAVLINK_OK == error) &&
+        (fgets(line, ARMAVLINK_FILE_PARSER_MAX_CHAR_IN_LINE, file) != NULL))
+    {
+        error = ARMAVLINK_FileParser_ReadFirstLine(fileParser, line);
+    }
+    
+    // read the rest of the file
     while ((ARMAVLINK_OK == error) &&
            (fgets(line, ARMAVLINK_FILE_PARSER_MAX_CHAR_IN_LINE, file) != NULL))
     {
-        // the first line is the qgc description
-        if (i == 0)
-        {
-            error = ARMAVLINK_FileParser_ReadFirstLine(fileParser, line);
-        }
-        else
-        {
-            error = ARMAVLINK_FileParser_ReadMavlinkCommand(fileParser, line, missionItemList);
-        }
-
-        i++;
+        error = ARMAVLINK_FileParser_ReadMavlinkCommand(fileParser, line, missionItemList);
     }
 
     if (file != NULL)
