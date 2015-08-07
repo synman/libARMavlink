@@ -24,7 +24,7 @@ SOURCE_FILES                                                =   $(HEADER_FILES) 
                                                                 ../Sources/ARMAVLINK_ListUtils.h                          \
                                                                 ../Sources/ARMAVLINK_MissionItemUtils.c                   \
                                                                 ../Sources/ARMAVLINK_MissionItemUtils.h                   \
-                                                                ../Sources/ARMAVLINK_Error.c
+                                                                ../gen/Sources/ARMAVLINK_Error.c
 
 # The library names to build (note we are building static and shared libs)
 if DEBUG_MODE
