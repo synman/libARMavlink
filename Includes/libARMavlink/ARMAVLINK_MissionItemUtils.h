@@ -104,15 +104,61 @@ eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkTakeoffMissionItem(mavl
  */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkChangeSpeedMissionItem(mavlink_mission_item_t* missionItem, int groundSpeed, float speed, float throttle);
 
+/**
+ * @brief Fill a start video capture mission item with the given params and the default params
+ * @brief This item will start the video capture when it will be read by the drone
+ * @param[out] missionItem : pointer on the mission item to fill
+ * @param[in] cameraId : id of the camera to start the capture (not used)
+ * @param[in] framesPerSeconds : Frame per seconds of the video capture (not used)
+ * @param[in] resolution : resolution in megapixels (0.3 for 640x480, 1.3 for 1280x720...)
+ * @return ARMAVLINK_OK if operation went well, the enum description of the error otherwise
+ */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkVideoStartCapture(mavlink_mission_item_t* missionItem, int cameraId, float framesPerSeconds, float resolution);
 
+/**
+ * @brief Fill a stop video capture mission item with the given params and the default params
+ * @brief This item will stop a started video capture when it will be read by the drone
+ * @param[out] missionItem : pointer on the mission item to fill
+ * @return ARMAVLINK_OK if operation went well, the enum description of the error otherwise
+ */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkVideoStopCapture(mavlink_mission_item_t* missionItem);
 
+/**
+ * @brief Fill a start image capture mission item with the given params and the default params
+ * @brief This item will start a timelapse when it will be read by the drone
+ * @param[out] missionItem : pointer on the mission item to fill
+ * @param[in] period : the length of the capture in seconds (a minimum period which depends on the resolution is filtered by the drone)
+ * @param[in] imagesCount : Number of image to take. 0 for unlimited capture (not used)
+ * @param[in] resolution : resolution in megapixels (0.3 for 640x480, 1.3 for 1280x720...)
+ * @return ARMAVLINK_OK if operation went well, the enum description of the error otherwise
+ */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkImageStartCapture(mavlink_mission_item_t* missionItem,float period,float imagesCount,float resolution);
 
+/**
+ * @brief Stop a started image capture
+ * @param[out] missionItem : pointer on the mission item to fill
+ * @return ARMAVLINK_OK if operation went well, the enum description of the error otherwise
+ */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkImageStopCapture(mavlink_mission_item_t* missionItem);
 
+/**
+ * @brief Fill a panorama mission item with the given params and the default params
+ * @brief This item will start a move by the drone or its camera on the yaw/pan axis and on the tilt when it will be read by the drone
+ * @param[out] missionItem : pointer on the mission item to fill
+ * @param[in] horizontalAngle : the horizontal angle (deg)
+ * @param[in] verticalAngle : the vertical angle (deg)
+ * @param[in] horizontalRotationSpeed : the desired horizontal rotation speed (m/s)
+ * @param[in] verticalRotationSpeed : the desired vertical rotation speed (m/s)
+ * @return ARMAVLINK_OK if operation went well, the enum description of the error otherwise
+ */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkCreatePanorama(mavlink_mission_item_t* missionItem,float horizontalAngle,float verticalAngle,float horizontalRotationSpeed,float verticalRotationSpeed);
 
+/**
+ * @brief Fill a delay mission item with the given params and the default params
+ * @brief This item will pause the flight plan when it will be read by the drone
+ * @param[out] missionItem : pointer on the mission item to fill
+ * @param[in] duration : duration of the delay (s)
+ * @return ARMAVLINK_OK if operation went well, the enum description of the error otherwise
+ */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkDelay(mavlink_mission_item_t* missionItem,float duration);
 #endif

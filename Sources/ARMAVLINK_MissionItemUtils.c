@@ -152,8 +152,6 @@ eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkNavWaypointMissionItem(
 /* MAV_CMD_NAV_LAND */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkLandMissionItem(mavlink_mission_item_t* missionItem, float latitude, float longitude, float altitude, float yaw)
 {
-    // TODO: remove this message
-    ARSAL_PRINT (ARSAL_PRINT_ERROR, ARMAVLINK_MISSION_ITEM_UTILS_TAG, "Watch out, the MAV_CMD_NAV_LAND item creation has not been tested yet");
     return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
                                                                             missionItem,
                                                                             ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
@@ -174,8 +172,6 @@ eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkLandMissionItem(mavlink
 /* MAV_CMD_NAV_TAKEOFF */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkTakeoffMissionItem(mavlink_mission_item_t* missionItem, float latitude, float longitude, float altitude, float yaw, float pitch)
 {
-    // TODO: remove this message
-    ARSAL_PRINT (ARSAL_PRINT_ERROR, ARMAVLINK_MISSION_ITEM_UTILS_TAG, "Watch out, the MAV_CMD_NAV_TAKEOFF item creation has not been tested yet");
     return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
                                                                             missionItem,
                                                                             pitch,
@@ -196,8 +192,6 @@ eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkTakeoffMissionItem(mavl
 /* MAV_CMD_NAV_DO_CHANGE_SPEED */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkChangeSpeedMissionItem(mavlink_mission_item_t* missionItem, int groundSpeed, float speed, float throttle)
 {
-    // TODO: remove this message
-    ARSAL_PRINT (ARSAL_PRINT_ERROR, ARMAVLINK_MISSION_ITEM_UTILS_TAG, "Watch out, the MAV_CMD_NAV_DO_CHANGE_SPEED item creation has not been tested yet");
     eARMAVLINK_ERROR error = ARMAVLINK_OK;
     if ((groundSpeed != 0) && (groundSpeed != 1))
     {
@@ -229,8 +223,6 @@ eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkChangeSpeedMissionItem(
 /* MAV_CMD_VIDEO_START_CAPTURE */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkVideoStartCapture(mavlink_mission_item_t* missionItem, int cameraId, float framesPerSeconds, float resolution)
 {
-    // TODO: remove this message
-    ARSAL_PRINT (ARSAL_PRINT_ERROR, ARMAVLINK_MISSION_ITEM_UTILS_TAG, "Watch out, the MAV_CMD_VIDEO_START_CAPTURE item creation has not been tested yet");
     return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
                                                                                     missionItem,
                                                                                     cameraId,
@@ -251,8 +243,6 @@ eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkVideoStartCapture(mavli
 /* MAV_CMD_VIDEO_STOP_CAPTURE */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkVideoStopCapture(mavlink_mission_item_t* missionItem)
 {
-    // TODO: remove this message
-    ARSAL_PRINT (ARSAL_PRINT_ERROR, ARMAVLINK_MISSION_ITEM_UTILS_TAG, "Watch out, the MAV_CMD_VIDEO_STOP_CAPTURE item creation has not been tested yet");
     return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
                                                                                     missionItem,
                                                                                     ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
@@ -273,8 +263,6 @@ eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkVideoStopCapture(mavlin
 /* MAV_CMD_IMAGE_START_CAPTURE */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkImageStartCapture(mavlink_mission_item_t* missionItem,float period,float imagesCount,float resolution)
 {
-    // TODO: remove this message
-    ARSAL_PRINT (ARSAL_PRINT_ERROR, ARMAVLINK_MISSION_ITEM_UTILS_TAG, "Watch out, the MAV_CMD_IMAGE_START_CAPTURE item creation has not been tested yet");
     return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
                                                                             missionItem,
                                                                             period,
@@ -295,8 +283,6 @@ eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkImageStartCapture(mavli
 /* MAV_CMD_IMAGE_STOP_CAPTURE */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkImageStopCapture(mavlink_mission_item_t* missionItem)
 {
-    // TODO: remove this message
-    ARSAL_PRINT (ARSAL_PRINT_ERROR, ARMAVLINK_MISSION_ITEM_UTILS_TAG, "Watch out, the MAV_CMD_IMAGE_STOP_CAPTURE item creation has not been tested yet");
     return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
                                                                             missionItem,
                                                                             ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
@@ -317,8 +303,6 @@ eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkImageStopCapture(mavlin
 /* MAV_CMD_CONDITION_DELAY */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkDelay(mavlink_mission_item_t* missionItem,float duration)
 {
-    // TODO: remove this message
-    ARSAL_PRINT (ARSAL_PRINT_ERROR, ARMAVLINK_MISSION_ITEM_UTILS_TAG, "Watch out, the MAV_CMD_CONDITION_DELAY item creation has not been tested yet");
     return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
                                                                             missionItem,
                                                                             duration,
@@ -339,8 +323,6 @@ eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkDelay(mavlink_mission_i
 /* MAV_CMD_PANORAMA_CREATE */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkCreatePanorama(mavlink_mission_item_t* missionItem,float horizontalAngle,float verticalAngle,float horizontalRotationSpeed,float verticalRotationSpeed)
 {
-    // TODO: remove this message
-    ARSAL_PRINT (ARSAL_PRINT_ERROR, ARMAVLINK_MISSION_ITEM_UTILS_TAG, "Watch out, the MAV_CMD_PANORAMA_CREATE item creation has not been tested yet");
     return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
                                                                             missionItem,
                                                                             horizontalAngle,
