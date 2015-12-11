@@ -6,8 +6,12 @@ LOCAL_CATEGORY_PATH := dragon/libs
 LOCAL_MODULE := libARMavlink
 LOCAL_DESCRIPTION := ARSDK Mavlink
 
-LOCAL_LIBRARIES := ARSDKBuildUtils libARSAL libmavlink
+LOCAL_LIBRARIES := ARSDKBuildUtils libARSAL
 LOCAL_EXPORT_LDLIBS := -larmavlink
+
+# the two following lines are for generating mavlink C headers
+LOCAL_CUSTOM_MACROS := \
+	mavgen-macro:C,generated,$(LOCAL_PATH)/message_definitions/parrot.xml
 
 # Copy in build dir so bootstrap files are generated in build dir
 LOCAL_AUTOTOOLS_COPY_TO_BUILD_DIR := 1
