@@ -339,3 +339,41 @@ eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkCreatePanorama(mavlink_
                                                                             ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
                                                                             );
 }
+
+eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkSetROI(mavlink_mission_item_t* missionItem, MAV_ROI mode, int missionIndex, int roiIndex, float latitude, float longitude, float altitude)
+{
+    return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
+                                                                            missionItem,
+                                                                            mode,
+                                                                            missionIndex,
+                                                                            roiIndex,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            latitude,
+                                                                            longitude,
+                                                                            altitude,
+                                                                            MAV_CMD_DO_SET_ROI,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
+                                                                            );
+}
+
+eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkSetViewMode(mavlink_mission_item_t* missionItem, MAV_VIEW_MODE_TYPE type, int roiIndex)
+{
+    return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
+                                                                            missionItem,
+                                                                            type,
+                                                                            roiIndex,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                                                                            MAV_CMD_SET_VIEW_MODE,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
+                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
+                                                                            );
+}

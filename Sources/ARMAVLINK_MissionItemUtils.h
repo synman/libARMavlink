@@ -39,7 +39,6 @@
 
 #include <libARMavlink/ARMAVLINK_MissionItemUtils.h>
 #include <libARMavlink/ARMAVLINK_Error.h>
-#include <mavlink/common/mavlink.h>
 
 /**
  * @brief Determine if two mission items are equals
