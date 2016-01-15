@@ -54,7 +54,7 @@ define LOCAL_AUTOTOOLS_CMD_POST_UNPACK
 endef
 
 define LOCAL_AUTOTOOLS_CMD_POST_INSTALL
-    $(Q) cp -R $(TARGET_OUT_BUILD)/libARMavlink/generated/ $(TARGET_OUT_STAGING)/usr/include/
+    $(Q) cp -R $(TARGET_OUT_BUILD)/libARMavlink/generated/* $(TARGET_OUT_STAGING)/usr/include/
 endef
 
 include $(BUILD_AUTOTOOLS)
