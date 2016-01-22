@@ -49,6 +49,8 @@ public class ARMavlinkMissionItem
     private static native int nativeCreateMavlinkImageStopCapture(long nativeItem);
     private static native int nativeCreateMavlinkCreatePanorama(long nativeItem, float horizontalAngle, float verticalAngle, float horizontalRotationSpeed, float verticalRotationSpeed);
     private static native int nativeCreateMavlinkDelay(long nativeItem, float delayDuration);
+    private static native int nativeCreateMavlinkSetROI(long nativeItem, int roiMode, int missionIndex, int roiIndex, float latitude, float longitude, float altitude);
+    private static native int nativeCreateMavlinkSetViewMode(long nativeItem, int viewModeType, int roiIndex);
 
     private native long nativeNew();
     private native long nativeDelete(long nativeItem);
@@ -121,15 +123,18 @@ public class ARMavlinkMissionItem
         isCreateByMe = false;
     }
 
-    public long getNativePointre(){
+    public long getNativePointer()
+    {
         return nativeMissionItem;
     }
 
     /**
      * Dispose NetworkIOBufferParam
      */
-    public void dispose() {
-        if(nativeMissionItem != 0 && isCreateByMe) {
+    public void dispose() 
+    {
+        if(nativeMissionItem != 0 && isCreateByMe) 
+        {
             nativeDelete(nativeMissionItem);
             nativeMissionItem = 0;
         }
@@ -138,10 +143,14 @@ public class ARMavlinkMissionItem
     /**
      * Destructor
      */
-    public void finalize () throws Throwable {
-        try {
+    public void finalize () throws Throwable 
+    {
+        try 
+        {
             dispose ();
-        } finally {
+        } 
+        finally 
+        {
             super.finalize ();
         }
     }
@@ -165,7 +174,7 @@ public class ARMavlinkMissionItem
     public static ARMavlinkMissionItem CreateMavlinkMissionItemWithAllParams(float param1, float param2, float param3, float param4, float latitude, float longitude, float altitude, int command, int seq,  int frame, int current, int autocontinue)
     {
         ARMavlinkMissionItem missionItem = new ARMavlinkMissionItem();
-        int value = nativeCreateMavlinkMissionItemWithAllParams(missionItem.getNativePointre(), param1, param2, param3, param4, latitude, longitude, altitude, command, seq, frame, current, autocontinue);
+        int value = nativeCreateMavlinkMissionItemWithAllParams(missionItem.getNativePointer(), param1, param2, param3, param4, latitude, longitude, altitude, command, seq, frame, current, autocontinue);
 
         ARMAVLINK_ERROR_ENUM error = ARMAVLINK_ERROR_ENUM.getFromValue(value);
 
@@ -193,7 +202,7 @@ public class ARMavlinkMissionItem
     public static ARMavlinkMissionItem CreateMavlinkNavWaypointMissionItem(float latitude, float longitude, float altitude, float yaw)
     {
         ARMavlinkMissionItem missionItem = new ARMavlinkMissionItem();
-        int value = nativeCreateMavlinkNavWaypointMissionItem(missionItem.getNativePointre(), latitude, longitude, altitude, yaw);
+        int value = nativeCreateMavlinkNavWaypointMissionItem(missionItem.getNativePointer(), latitude, longitude, altitude, yaw);
 
         ARMAVLINK_ERROR_ENUM error = ARMAVLINK_ERROR_ENUM.getFromValue(value);
 
@@ -221,7 +230,7 @@ public class ARMavlinkMissionItem
     public static ARMavlinkMissionItem CreateMavlinkLandMissionItem(float latitude, float longitude, float altitude, float yaw)
     {
         ARMavlinkMissionItem missionItem = new ARMavlinkMissionItem();
-        int value = nativeCreateMavlinkLandMissionItem(missionItem.getNativePointre(), latitude, longitude, altitude, yaw);
+        int value = nativeCreateMavlinkLandMissionItem(missionItem.getNativePointer(), latitude, longitude, altitude, yaw);
 
         ARMAVLINK_ERROR_ENUM error = ARMAVLINK_ERROR_ENUM.getFromValue(value);
 
@@ -248,7 +257,7 @@ public class ARMavlinkMissionItem
     public static ARMavlinkMissionItem CreateMavlinkChangeSpeedMissionItem(int groundSpeed, float speed, float throttle)
     {
         ARMavlinkMissionItem missionItem = new ARMavlinkMissionItem();
-        int value = nativeCreateMavlinkChangeSpeedMissionItem(missionItem.getNativePointre(), groundSpeed, speed, throttle);
+        int value = nativeCreateMavlinkChangeSpeedMissionItem(missionItem.getNativePointer(), groundSpeed, speed, throttle);
 
         ARMAVLINK_ERROR_ENUM error = ARMAVLINK_ERROR_ENUM.getFromValue(value);
 
@@ -277,7 +286,7 @@ public class ARMavlinkMissionItem
     public static ARMavlinkMissionItem CreateMavlinkTakeoffMissionItem(float latitude, float longitude, float altitude, float yaw, float pitch)
     {
         ARMavlinkMissionItem missionItem = new ARMavlinkMissionItem();
-        int value = nativeCreateMavlinkTakeoffMissionItem(missionItem.getNativePointre(), latitude, longitude, altitude, yaw, pitch);
+        int value = nativeCreateMavlinkTakeoffMissionItem(missionItem.getNativePointer(), latitude, longitude, altitude, yaw, pitch);
 
         ARMAVLINK_ERROR_ENUM error = ARMAVLINK_ERROR_ENUM.getFromValue(value);
 
@@ -304,7 +313,7 @@ public class ARMavlinkMissionItem
     public static ARMavlinkMissionItem CreateMavlinkVideoStartCaptureMissionItem(int cameraId, float framesPerSeconds, float resolution)
     {
         ARMavlinkMissionItem missionItem = new ARMavlinkMissionItem();
-        int value = nativeCreateMavlinkVideoStartCapture(missionItem.getNativePointre(), cameraId, framesPerSeconds, resolution);
+        int value = nativeCreateMavlinkVideoStartCapture(missionItem.getNativePointer(), cameraId, framesPerSeconds, resolution);
 
         ARMAVLINK_ERROR_ENUM error = ARMAVLINK_ERROR_ENUM.getFromValue(value);
 
@@ -328,7 +337,7 @@ public class ARMavlinkMissionItem
     public static ARMavlinkMissionItem CreateMavlinkVideoStopCaptureMissionItem()
     {
         ARMavlinkMissionItem missionItem = new ARMavlinkMissionItem();
-        int value = nativeCreateMavlinkVideoStopCapture(missionItem.getNativePointre());
+        int value = nativeCreateMavlinkVideoStopCapture(missionItem.getNativePointer());
 
         ARMAVLINK_ERROR_ENUM error = ARMAVLINK_ERROR_ENUM.getFromValue(value);
 
@@ -354,7 +363,7 @@ public class ARMavlinkMissionItem
     public static ARMavlinkMissionItem CreateMavlinkImageStartCaptureMissionItem(float period, float imagesCount, float resolution)
     {
         ARMavlinkMissionItem missionItem = new ARMavlinkMissionItem();
-        int value = nativeCreateMavlinkImageStartCapture(missionItem.getNativePointre(), period, imagesCount, resolution);
+        int value = nativeCreateMavlinkImageStartCapture(missionItem.getNativePointer(), period, imagesCount, resolution);
         ARMAVLINK_ERROR_ENUM error = ARMAVLINK_ERROR_ENUM.getFromValue(value);
         if(error == ARMAVLINK_ERROR_ENUM.ARMAVLINK_OK)
         {
@@ -377,7 +386,7 @@ public class ARMavlinkMissionItem
     public static ARMavlinkMissionItem CreateMavlinkDelay(float durationDelay)
     {
         ARMavlinkMissionItem missionItem = new ARMavlinkMissionItem();
-        int value = nativeCreateMavlinkDelay(missionItem.getNativePointre(), durationDelay);
+        int value = nativeCreateMavlinkDelay(missionItem.getNativePointer(), durationDelay);
 
         ARMAVLINK_ERROR_ENUM error = ARMAVLINK_ERROR_ENUM.getFromValue(value);
 
@@ -401,7 +410,7 @@ public class ARMavlinkMissionItem
     public static ARMavlinkMissionItem CreateMavlinkImageStopCaptureMissionItem()
     {
         ARMavlinkMissionItem missionItem = new ARMavlinkMissionItem();
-        int value = nativeCreateMavlinkImageStopCapture(missionItem.getNativePointre());
+        int value = nativeCreateMavlinkImageStopCapture(missionItem.getNativePointer());
 
         ARMAVLINK_ERROR_ENUM error = ARMAVLINK_ERROR_ENUM.getFromValue(value);
 
@@ -428,7 +437,65 @@ public class ARMavlinkMissionItem
     public static ARMavlinkMissionItem CreateMavlinkCreatePanoramaMissionItem(float horizontalAngle, float verticalAngle, float horizontalRotationSpeed, float verticalRotationSpeed)
     {
         ARMavlinkMissionItem missionItem = new ARMavlinkMissionItem();
-        int value = nativeCreateMavlinkCreatePanorama(missionItem.getNativePointre(), horizontalAngle, verticalAngle, horizontalRotationSpeed, verticalRotationSpeed);
+        int value = nativeCreateMavlinkCreatePanorama(missionItem.getNativePointer(), horizontalAngle, verticalAngle, horizontalRotationSpeed, verticalRotationSpeed);
+
+        ARMAVLINK_ERROR_ENUM error = ARMAVLINK_ERROR_ENUM.getFromValue(value);
+
+        if(error == ARMAVLINK_ERROR_ENUM.ARMAVLINK_OK)
+        {
+            missionItem.updateFromNative();
+        }
+        else
+        {
+            ARSALPrint.e (TAG, "Create Mavlink Mission Item Error : "+ error.toString());
+            missionItem.dispose();
+            missionItem = null;
+        }
+        return missionItem;
+    }
+
+    /**
+     * Fill a set view mode mission item with the given params and the default params 
+     * This item will set the way the drone should behave regarding its orientation between two waypoints
+     * @param mode  The mode of the ROI (see MAV_ROI) (currently must be MAV_ROI_LOCATION)
+     * @param missionIndex   The index of the mission or the target id (used if mode is MAV_ROI_TARGET or MAV_ROI_WPINDEX)
+     * @param roiIndex   The index of roi. This is used to make a reference to this ROI in others mission items
+     * @param latitude   the latitude of the ROI (used if mode is MAV_ROI_LOCATION)
+     * @param longitude   the longitude of the ROI (used if mode is MAV_ROI_LOCATION)
+     * @param altitude   the altitude of the ROI (used if mode is MAV_ROI_LOCATION)
+     * @return {@link ARMavlinkMissionItem} mission item
+     */
+    public static ARMavlinkMissionItem CreateMavlinkSetROI(MAV_ROI mode, int missionIndex, int roiIndex, float latitude, float longitude, float altitude)
+    {
+        ARMavlinkMissionItem missionItem = new ARMavlinkMissionItem();
+        int value = nativeCreateMavlinkSetROI(missionItem.getNativePointer(), mode.ordinal(), missionIndex, roiIndex, latitude, longitude, altitude);
+
+        ARMAVLINK_ERROR_ENUM error = ARMAVLINK_ERROR_ENUM.getFromValue(value);
+
+        if(error == ARMAVLINK_ERROR_ENUM.ARMAVLINK_OK)
+        {
+            missionItem.updateFromNative();
+        }
+        else
+        {
+            ARSALPrint.e (TAG, "Create Mavlink Mission Item Error : "+ error.toString());
+            missionItem.dispose();
+            missionItem = null;
+        }
+        return missionItem;
+    }
+
+    /**
+     * Fill a set view mode mission item with the given params and the default params
+     * This item will set the way the drone should behave regarding its orientation between two waypoints
+     * @param viewModeType  The type of the view mode (see MAV_VIEW_MODE_TYPE)
+     * @param roiIndex   The index of the ROI to follow if type is VIEW_MODE_TYPE_ROI. Ignored otherwise.
+     * @return {@link ARMavlinkMissionItem} mission item
+     */
+    public static ARMavlinkMissionItem CreateMavlinkSetViewMode(MAV_VIEW_MODE_TYPE viewModeType, int roiIndex)
+    {
+        ARMavlinkMissionItem missionItem = new ARMavlinkMissionItem();
+        int value = nativeCreateMavlinkSetViewMode(missionItem.getNativePointer(), viewModeType.ordinal(), roiIndex);
 
         ARMAVLINK_ERROR_ENUM error = ARMAVLINK_ERROR_ENUM.getFromValue(value);
 
