@@ -153,7 +153,6 @@ finish:
 eARMAVLINK_ERROR ARMAVLINK_FileParser_ReadFirstLine(ARMAVLINK_FileParser_t *fileParser, char *line)
 {
     eARMAVLINK_ERROR error = ARMAVLINK_OK;
-    char *token;
     char qgc_word[ARMAVLINK_FILE_PARSER_MAX_CHAR_IN_LINE];
     char wpl_word[ARMAVLINK_FILE_PARSER_MAX_CHAR_IN_LINE];
     char filename_word[ARMAVLINK_FILE_PARSER_MAX_CHAR_IN_LINE];
@@ -175,7 +174,6 @@ finish:
 
 eARMAVLINK_ERROR ARMAVLINK_FileParser_ReadMavlinkCommand(ARMAVLINK_FileParser_t *fileParser, char *line, mission_item_list_t *missionItemList)
 {
-    char *token;
     float param1;
     float param2;
     float param3;
