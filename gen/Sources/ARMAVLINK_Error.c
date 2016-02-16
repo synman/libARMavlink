@@ -40,7 +40,7 @@
 
 #include <libARMavlink/ARMAVLINK_Error.h>
 
-char* ARMAVLINK_Error_ToString (eARMAVLINK_ERROR error)
+const char* ARMAVLINK_Error_ToString (eARMAVLINK_ERROR error)
 {
     switch (error)
     {
