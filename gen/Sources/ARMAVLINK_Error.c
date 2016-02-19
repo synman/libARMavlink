@@ -81,7 +81,6 @@ const char* ARMAVLINK_Error_ToString (eARMAVLINK_ERROR error)
         return "A word was not expected during parsing";
         break;
     default:
-        return "Unknown value";
         break;
     }
     return "Unknown value";
