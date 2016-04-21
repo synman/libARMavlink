@@ -38,7 +38,7 @@
 #define _ARMAVLINK_MISSIONITEMUTILS_h
 
 #include <libARMavlink/ARMAVLINK_Error.h>
-#include <mavlink/common/mavlink.h>
+#include <mavlink/parrot/mavlink.h>
 
 /**
  * @brief Fill a mission item with the given params and the default params
@@ -161,4 +161,27 @@ eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkCreatePanorama(mavlink_
  * @return ARMAVLINK_OK if operation went well, the enum description of the error otherwise
  */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkDelay(mavlink_mission_item_t* missionItem,float duration);
+
+/**
+ * @brief Fill a set view mode mission item with the given params and the default params
+ * @brief This item will set the way the drone should behave regarding its orientation between two waypoints
+ * @param[out] missionItem : pointer on the mission item to fill
+ * @param[in] mode : The mode of the ROI (see MAV_ROI)
+ * @param[in] missionIndex : The index of the mission or the target id (used if mode is MAV_ROI_TARGET or MAV_ROI_WPINDEX)
+ * @param[in] roiIndex : The index of roi. This is used to make a reference to this ROI in others mission items
+ * @param[in] latitude : the latitude of the ROI (used if mode is MAV_ROI_LOCATION)
+ * @param[in] longitude : the longitude of the ROI (used if mode is MAV_ROI_LOCATION)
+ * @param[in] altitude : the altitude of the ROI (used if mode is MAV_ROI_LOCATION)
+ */
+eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkSetROI(mavlink_mission_item_t* missionItem, MAV_ROI mode, int missionIndex, int roiIndex, float latitude, float longitude, float altitude);
+
+/**
+ * @brief Fill a set view mode mission item with the given params and the default params
+ * @brief This item will set the way the drone should behave regarding its orientation between two waypoints
+ * @param[out] missionItem : pointer on the mission item to fill
+ * @param[in] type : The type of the view mode (see MAV_VIEW_MODE_TYPE)
+ * @param[in] roiIndex : The index of the ROI to follow if type is VIEW_MODE_TYPE_ROI. Ignored otherwise.
+ * @return ARMAVLINK_OK if operation went well, the enum description of the error otherwise
+ */
+eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkSetViewMode(mavlink_mission_item_t* missionItem, MAV_VIEW_MODE_TYPE type, int roiIndex);
 #endif

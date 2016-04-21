@@ -102,9 +102,9 @@ public class ARMavlinkFileGenerator
     public ARMAVLINK_ERROR_ENUM addMissionItem(ARMavlinkMissionItem missionItem)
     {
         ARMAVLINK_ERROR_ENUM error = ARMAVLINK_ERROR_ENUM.ARMAVLINK_OK;
-        if(nativeFileGenerator != 0 && missionItem.getNativePointre() != 0)
+        if(nativeFileGenerator != 0 && missionItem.getNativePointer() != 0)
         {
-            int value = nativeAddMissionItem(nativeFileGenerator, missionItem.getNativePointre());
+            int value = nativeAddMissionItem(nativeFileGenerator, missionItem.getNativePointer());
             error = ARMAVLINK_ERROR_ENUM.getFromValue(value);
         }
         else
@@ -123,9 +123,9 @@ public class ARMavlinkFileGenerator
     public ARMAVLINK_ERROR_ENUM replaceMissionItem(ARMavlinkMissionItem missionItem, int index)
     {
         ARMAVLINK_ERROR_ENUM error = ARMAVLINK_ERROR_ENUM.ARMAVLINK_OK;
-        if(nativeFileGenerator != 0 &&  missionItem.getNativePointre() != 0)
+        if(nativeFileGenerator != 0 &&  missionItem.getNativePointer() != 0)
         {
-            int value = nativeReplaceMissionItem(nativeFileGenerator, missionItem.getNativePointre(), index);
+            int value = nativeReplaceMissionItem(nativeFileGenerator, missionItem.getNativePointer(), index);
             error = ARMAVLINK_ERROR_ENUM.getFromValue(value);
         }
         else
@@ -144,9 +144,9 @@ public class ARMavlinkFileGenerator
     public ARMAVLINK_ERROR_ENUM insertMissionItem(ARMavlinkMissionItem missionItem, int index)
     {
         ARMAVLINK_ERROR_ENUM error = ARMAVLINK_ERROR_ENUM.ARMAVLINK_OK;
-        if(nativeFileGenerator != 0 && missionItem.getNativePointre() != 0)
+        if(nativeFileGenerator != 0 && missionItem.getNativePointer() != 0)
         {
-            int value = nativeInsertMissionItem(nativeFileGenerator, missionItem.getNativePointre(), index);
+            int value = nativeInsertMissionItem(nativeFileGenerator, missionItem.getNativePointer(), index);
             error = ARMAVLINK_ERROR_ENUM.getFromValue(value);
         }
         else

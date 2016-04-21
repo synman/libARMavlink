@@ -155,6 +155,22 @@ Java_com_parrot_arsdk_armavlink_ARMavlinkMissionItem_nativeCreateMavlinkDelay (J
     return ARMAVLINK_MissionItemUtils_CreateMavlinkDelay(item, delayDuration);
 }
 
+JNIEXPORT jint JNICALL
+Java_com_parrot_arsdk_armavlink_ARMavlinkMissionItem_nativeCreateMavlinkSetROI (JNIEnv *env, jclass class, jlong missionItemPtr, jint roiMode, jint missionIndex, jint roiIndex, jfloat latitude, jfloat longitude, jfloat altitude)
+{
+    mavlink_mission_item_t *item = (mavlink_mission_item_t*) (intptr_t) missionItemPtr;
+    ARSAL_PRINT(ARSAL_PRINT_DEBUG, ARMAVLINK_JNIMAVLINK_TAG, "native - CreateMavlinkSetROI");
+    return ARMAVLINK_MissionItemUtils_CreateMavlinkSetROI(item, roiMode, missionIndex, roiIndex, latitude, longitude, altitude);
+}
+
+JNIEXPORT jint JNICALL
+Java_com_parrot_arsdk_armavlink_ARMavlinkMissionItem_nativeCreateMavlinkSetViewMode (JNIEnv *env, jclass class, jlong missionItemPtr, jint viewModeType, jint roiIndex)
+{
+    mavlink_mission_item_t *item = (mavlink_mission_item_t*) (intptr_t) missionItemPtr;
+    ARSAL_PRINT(ARSAL_PRINT_DEBUG, ARMAVLINK_JNIMAVLINK_TAG, "native - CreateMavlinkSetViewMode");
+    return ARMAVLINK_MissionItemUtils_CreateMavlinkSetViewMode(item, viewModeType, roiIndex);
+}
+
 /*****************************************
  *
  *             Setters

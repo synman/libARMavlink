@@ -39,7 +39,7 @@
 
 #include <libARMavlink/ARMAVLINK_ListUtils.h>
 #include <libARMavlink/ARMAVLINK_Error.h>
-#include <mavlink/common/mavlink.h>
+#include <mavlink/parrot/mavlink.h>
 
 /**
  * @brief Add a mission item in the list
