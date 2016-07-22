@@ -40,7 +40,7 @@
 
 #include <libARMavlink/ARMAVLINK_Error.h>
 
-char* ARMAVLINK_Error_ToString (eARMAVLINK_ERROR error)
+const char* ARMAVLINK_Error_ToString (eARMAVLINK_ERROR error)
 {
     switch (error)
     {
@@ -81,7 +81,6 @@ char* ARMAVLINK_Error_ToString (eARMAVLINK_ERROR error)
         return "A word was not expected during parsing";
         break;
     default:
-        return "Unknown value";
         break;
     }
     return "Unknown value";

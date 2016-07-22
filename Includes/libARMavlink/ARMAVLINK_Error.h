@@ -71,6 +71,6 @@ typedef enum
  *
  * @note User should NEVER try to modify a returned string
  */
-char* ARMAVLINK_Error_ToString (eARMAVLINK_ERROR error);
+const char* ARMAVLINK_Error_ToString (eARMAVLINK_ERROR error);
 
 #endif // _ARMAVLINK_ERROR_H_

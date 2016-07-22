@@ -144,9 +144,10 @@ eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkImageStopCapture(mavlin
 /**
  * @brief Fill a panorama mission item with the given params and the default params
  * @brief This item will start a move by the drone or its camera on the yaw/pan axis and on the tilt when it will be read by the drone
+ * Note that, the first vertical angle will be applied relatively to the physical center of the camera.
  * @param[out] missionItem : pointer on the mission item to fill
- * @param[in] horizontalAngle : the horizontal angle (deg)
- * @param[in] verticalAngle : the vertical angle (deg)
+ * @param[in] horizontalAngle : the horizontal relative angle (deg)
+ * @param[in] verticalAngle : the vertical relative angle (deg) (negative angle moves the camera down).
  * @param[in] horizontalRotationSpeed : the desired horizontal rotation speed (m/s)
  * @param[in] verticalRotationSpeed : the desired vertical rotation speed (m/s)
  * @return ARMAVLINK_OK if operation went well, the enum description of the error otherwise

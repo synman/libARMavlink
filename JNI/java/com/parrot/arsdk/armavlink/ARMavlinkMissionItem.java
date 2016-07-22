@@ -429,9 +429,17 @@ public class ARMavlinkMissionItem
 
     /**
      * create a ARMavlinkMissionItem of Command MAV_CMD_PANORAMA_CREATE with the given/default params 
-     * @param horizontalAngle (saved in param1)
-     * @param verticalAngle (saved in param2)
-     * @param horizontalRotationSpeed (saved in param3)
+     *
+     * This item will start a move by the drone or its camera on the yaw/pan axis and on the tilt when it will
+     * be read by the drone
+     *
+     * Note that, the first vertical angle will be applied relatively to the physical center of the camera.
+     *
+     * @param horizontalAngle the horizontal relative angle (deg) (saved in param1)
+     * @param verticalAngle the vertical relative angle (deg) (negative angle moves the camera down)
+     *   (saved in param2)
+     * @param horizontalRotationSpeed the desired horizontal rotation speed (m/s) (saved in param3)
+     * @param verticalRotationSpeed the desired vertical rotation speed (m/s) (saved in param4)
      * @return {@link ARMavlinkMissionItem} mission item
      */
     public static ARMavlinkMissionItem CreateMavlinkCreatePanoramaMissionItem(float horizontalAngle, float verticalAngle, float horizontalRotationSpeed, float verticalRotationSpeed)

@@ -101,7 +101,7 @@ uint16_t ARMAVLINK_ListUtils_MissionItemListAdd(mission_item_list_t *list, const
 mavlink_mission_item_t* ARMAVLINK_ListUtils_MissionItemListGet(const mission_item_list_t *const list, const uint16_t index)
 {
     mavlink_mission_item_t *retval = NULL;
-    if(list != NULL && index < list->size && index >= 0)
+    if(list != NULL && index < list->size)
     {
         retval = &list->missionItems[index];
     }
@@ -119,8 +119,7 @@ eARMAVLINK_ERROR ARMAVLINK_ListUtils_MissionItemListDeleteMissionItem(mission_it
     eARMAVLINK_ERROR error = ARMAVLINK_OK;
     
     if ((list != NULL) &&
-        (index < list->size) &&
-        (index >= 0))
+        (index < list->size))
     {
         int nbMissionItemsToCopy = (list->size - index) - 1;
         if (nbMissionItemsToCopy > 0)
@@ -143,7 +142,6 @@ eARMAVLINK_ERROR ARMAVLINK_ListUtils_MissionItemListInsertMissionItem(mission_it
     
     if ((list != NULL) &&
         (index <= list->size) &&
-        (index >= 0) &&
         (missionItem != NULL))
     {
         if(list->size == list->alloc_size)
@@ -179,7 +177,6 @@ eARMAVLINK_ERROR ARMAVLINK_ListUtils_MissionItemListReplaceMissionItem(mission_i
     
     if ((list != NULL) &&
         (index <= list->size) &&
-        (index >= 0) &&
         (missionItem != NULL))
     {
         memcpy(&(list->missionItems[index]), missionItem, sizeof(mavlink_mission_item_t));
