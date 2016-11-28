@@ -179,7 +179,7 @@ int Load_ARMavlink_Java_Exception(JNIEnv *env)
 
     if (Mavlink_Exception_Class_Ref == NULL)
     {
-        ARSAL_PRINT(ARSAL_PRINT_DEBUG, ARMAVLINK_JNIMAVLINK_TAG, "");
+        ARSAL_PRINT(ARSAL_PRINT_DEBUG, ARMAVLINK_JNIMAVLINK_TAG, "%s", "");
 
         if (env == NULL)
         {
