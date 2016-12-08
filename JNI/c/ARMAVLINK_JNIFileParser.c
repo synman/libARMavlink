@@ -54,6 +54,10 @@
  *
  *****************************************/
 
+int Load_ARMavlink_Java_Exception(JNIEnv *env);
+void DeLoad_ARMavlink_Java_Exception(JNIEnv *env);
+void Throw_Mavlink_Exception(JNIEnv *env, eARMAVLINK_ERROR nativeError);
+
 #define ARMAVLINK_JNIMAVLINK_TAG "ARMAVLINK_JNIFileParser" /** tag used by the print of the file */
 
 JNIEXPORT jlong JNICALL
