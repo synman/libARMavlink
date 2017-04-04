@@ -377,3 +377,41 @@ eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkSetViewMode(mavlink_mis
             ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
     );
 }
+
+eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkSetPictureMode(mavlink_mission_item_t* missionItem,
+        MAV_STILL_CAPTURE_MODE_TYPE type, float interval) {
+    return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
+            missionItem,
+            type,
+            interval,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            MAV_CMD_SET_STILL_CAPTURE_MODE,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
+    );
+}
+
+eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkSetPhotoSensors(mavlink_mission_item_t* missionItem,
+        uint32_t sensorsBitfield) {
+    return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
+            missionItem,
+            sensorsBitfield,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            MAV_CMD_SET_PHOTO_SENSORS,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
+    );
+}

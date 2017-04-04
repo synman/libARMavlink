@@ -201,4 +201,29 @@ eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkSetROI(mavlink_mission_
  */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkSetViewMode(mavlink_mission_item_t* missionItem,
           MAV_VIEW_MODE_TYPE type, int roiIndex);
+
+/**
+ * @brief Fill a set picture mode mission item with the given params and the default params
+ *        This item will set the still capture mode. Only use if the target is equiped by a Sequoia. This item will be
+ *        ignored otherwise.
+ * @param[out] missionItem : pointer on the mission item to fill
+ * @param[in] mode : The mode chosen (see MAV_STILL_CAPTURE_MODE_TYPE)
+ * @param[in] interval : If mode is STILL_CAPTURE_MODE_TYPE_TIMELAPSE, interval is in milliseconds.
+ *                       If mode is STILL_CAPTURE_MODE_TYPE_GPS_POSITION, interval is in centimeters.
+ *                       If mode is STILL_CAPTURE_MODE_TYPE_AUTOMATIC_OVERLAP, interval is in overlapping percentage.
+ * @return ARMAVLINK_OK if operation went well, the enum description of the error otherwise
+ */
+eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkSetPictureMode(mavlink_mission_item_t* missionItem,
+        MAV_STILL_CAPTURE_MODE_TYPE mode, float interval);
+
+/**
+ * @brief Fill a set photo sensors mission item with the given params and the default params
+ *        This item will set the photo sensors that should be used to take a picture.
+ *        Only use if the target is equiped by a Sequoia. This item will be ignored otherwise.
+ * @param[out] missionItem : pointer on the mission item to fill
+ * @param[in] sensorsBitfield : a bitfield of all sensors that should be used (see MAV_PHOTO_SENSORS_FLAG)
+ * @return ARMAVLINK_OK if operation went well, the enum description of the error otherwise
+ */
+eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkSetPhotoSensors(mavlink_mission_item_t* missionItem,
+        uint32_t sensorsBitfield);
 #endif
