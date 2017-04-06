@@ -77,6 +77,18 @@ eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkNavWaypointMissionItem(
         float latitude, float longitude, float altitude, float yaw);
 
 /**
+ * @brief Fill a nav mission item with the given params, the default params
+ * @param[out] missionItem : pointer on the mission item to fill
+ * @param[in] latitude : the latitude of the mission item
+ * @param[in] longitude : the longitude of the mission item
+ * @param[in] altitude : the altitude of the mission item
+ * @param[in] radius : the radius of the mission item
+ * @return ARMAVLINK_OK if operation went well, the enum description of the error otherwise
+ */
+eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkNavWaypointMissionItemWithRadius(mavlink_mission_item_t* missionItem,
+        float latitude, float longitude, float altitude, float radius);
+
+/**
  * @brief Fill a land mission item with the given params and the default params
  * @param[out] missionItem : pointer on the mission item to fill
  * @param[in] latitude : the latitude of the mission item
