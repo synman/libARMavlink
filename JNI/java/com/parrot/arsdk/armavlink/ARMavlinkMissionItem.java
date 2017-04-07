@@ -39,6 +39,7 @@ public class ARMavlinkMissionItem
 
     private static native int nativeCreateMavlinkMissionItemWithAllParams(long nativeItem, float param1, float param2, float param3, float param4, float latitude, float longitude, float altitude, int command, int seq,  int frame, int current, int autocontinue);
     private static native int nativeCreateMavlinkNavWaypointMissionItem(long nativeItem, float latitude, float longitude, float altitude, float yaw);
+    private static native int nativeCreateMavlinkNavWaypointMissionItemWithRadius(long nativeItem, float latitude, float longitude, float altitude, float radius);
     private static native int nativeCreateMavlinkLandMissionItem(long nativeItem, float latitude, float longitude, float altitude, float yaw);
     private static native int nativeCreateMavlinkChangeSpeedMissionItem(long nativeItem, int groundSpeed, float speed, float throttle);
     private static native int nativeCreateMavlinkTakeoffMissionItem(long nativeItem, float latitude, float longitude, float altitude, float yaw, float pitch);
@@ -51,6 +52,8 @@ public class ARMavlinkMissionItem
     private static native int nativeCreateMavlinkDelay(long nativeItem, float delayDuration);
     private static native int nativeCreateMavlinkSetROI(long nativeItem, int roiMode, int missionIndex, int roiIndex, float latitude, float longitude, float altitude);
     private static native int nativeCreateMavlinkSetViewMode(long nativeItem, int viewModeType, int roiIndex);
+    private static native int nativeCreateMavlinkSetPictureMode(long nativeItem, int captureMode, float interval);
+    private static native int nativeCreateMavlinkSetPhotoSensors(long nativeItem, int sensorsBitfield);
 
     private native long nativeNew();
     private native long nativeDelete(long nativeItem);
@@ -203,6 +206,35 @@ public class ARMavlinkMissionItem
     {
         ARMavlinkMissionItem missionItem = new ARMavlinkMissionItem();
         int value = nativeCreateMavlinkNavWaypointMissionItem(missionItem.getNativePointer(), latitude, longitude, altitude, yaw);
+
+        ARMAVLINK_ERROR_ENUM error = ARMAVLINK_ERROR_ENUM.getFromValue(value);
+
+        if(error == ARMAVLINK_ERROR_ENUM.ARMAVLINK_OK)
+        {
+            missionItem.updateFromNative();
+        }
+        else
+        {
+            ARSALPrint.e (TAG, "Create Mavlink Mission Item Error : "+ error.toString());
+            missionItem.dispose();
+            missionItem = null;
+        }
+        return missionItem;
+    }
+
+    /**
+     * create a ARMavlinkMissionItem of Command MAV_CMD_NAV_WAYPOINT with the given/default params
+     * @param latitude (saved in x) the latitude of the mission item
+     * @param longitude (saved in y) the longitude of the mission item
+     * @param altitude (saved in z) the altitude of the mission item
+     * @param radius the radius to pass by WP (in meters). 0 to pass through the WP.
+ *   *               Positive value for clockwise orbit, negative value for counter-clockwise orbit.
+     * @return {@link ARMavlinkMissionItem} mission item
+     */
+    public static ARMavlinkMissionItem CreateMavlinkNavWaypointMissionItemWithRadius(float latitude, float longitude, float altitude, float radius)
+    {
+        ARMavlinkMissionItem missionItem = new ARMavlinkMissionItem();
+        int value = nativeCreateMavlinkNavWaypointMissionItemWithRadius(missionItem.getNativePointer(), latitude, longitude, altitude, radius);
 
         ARMAVLINK_ERROR_ENUM error = ARMAVLINK_ERROR_ENUM.getFromValue(value);
 
@@ -504,6 +536,67 @@ public class ARMavlinkMissionItem
     {
         ARMavlinkMissionItem missionItem = new ARMavlinkMissionItem();
         int value = nativeCreateMavlinkSetViewMode(missionItem.getNativePointer(), viewModeType.ordinal(), roiIndex);
+
+        ARMAVLINK_ERROR_ENUM error = ARMAVLINK_ERROR_ENUM.getFromValue(value);
+
+        if(error == ARMAVLINK_ERROR_ENUM.ARMAVLINK_OK)
+        {
+            missionItem.updateFromNative();
+        }
+        else
+        {
+            ARSALPrint.e (TAG, "Create Mavlink Mission Item Error : "+ error.toString());
+            missionItem.dispose();
+            missionItem = null;
+        }
+        return missionItem;
+    }
+
+    /**
+     * Fill a set picture mode mission item with the given params and the default params
+     * This item will set the still capture mode. Only use if the target is equiped by a Sequoia. This item will be
+     * ignored otherwise.
+     * @param mode  The mode chosen (see MAV_STILL_CAPTURE_MODE_TYPE)
+     * @param interval If mode is STILL_CAPTURE_MODE_TYPE_TIMELAPSE, interval is in milliseconds.
+     *                 If mode is STILL_CAPTURE_MODE_TYPE_GPS_POSITION, interval is in centimeters.
+     *                 If mode is STILL_CAPTURE_MODE_TYPE_AUTOMATIC_OVERLAP, interval is in overlapping percentage.
+     * @return {@link ARMavlinkMissionItem} mission item
+     */
+    public static ARMavlinkMissionItem CreateMavlinkSetPictureMode(MAV_STILL_CAPTURE_MODE_TYPE mode, float interval)
+    {
+        ARMavlinkMissionItem missionItem = new ARMavlinkMissionItem();
+        int value = nativeCreateMavlinkSetPictureMode(missionItem.getNativePointer(), mode.ordinal(), interval);
+
+        ARMAVLINK_ERROR_ENUM error = ARMAVLINK_ERROR_ENUM.getFromValue(value);
+
+        if(error == ARMAVLINK_ERROR_ENUM.ARMAVLINK_OK)
+        {
+            missionItem.updateFromNative();
+        }
+        else
+        {
+            ARSALPrint.e (TAG, "Create Mavlink Mission Item Error : "+ error.toString());
+            missionItem.dispose();
+            missionItem = null;
+        }
+        return missionItem;
+    }
+
+    /**
+     * Fill a set photo sensors mission item with the given params and the default params
+     * This item will set the photo sensors that should be used to take a picture.
+     * Only use if the target is equiped by a Sequoia. This item will be ignored otherwise.
+     * @param sensors  list of sensors that should be used (see MAV_PHOTO_SENSORS_FLAG)
+     * @return {@link ARMavlinkMissionItem} mission item
+     */
+    public static ARMavlinkMissionItem CreateMavlinkSetPhotoSensors(MAV_PHOTO_SENSORS_FLAG... sensors)
+    {
+        int bitfield = 0;
+        for (MAV_PHOTO_SENSORS_FLAG sensor : sensors) {
+            bitfield |= sensor.getValue();
+        }
+        ARMavlinkMissionItem missionItem = new ARMavlinkMissionItem();
+        int value = nativeCreateMavlinkSetPhotoSensors(missionItem.getNativePointer(), bitfield);
 
         ARMAVLINK_ERROR_ENUM error = ARMAVLINK_ERROR_ENUM.getFromValue(value);
 

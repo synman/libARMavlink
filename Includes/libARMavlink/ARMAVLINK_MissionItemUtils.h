@@ -82,7 +82,8 @@ eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkNavWaypointMissionItem(
  * @param[in] latitude : the latitude of the mission item
  * @param[in] longitude : the longitude of the mission item
  * @param[in] altitude : the altitude of the mission item
- * @param[in] radius : the radius of the mission item
+ * @param[in] radius : the radius to pass by WP (in meters). 0 to pass through the WP.
+ *                     Positive value for clockwise orbit, negative value for counter-clockwise orbit.
  * @return ARMAVLINK_OK if operation went well, the enum description of the error otherwise
  */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkNavWaypointMissionItemWithRadius(mavlink_mission_item_t* missionItem,
