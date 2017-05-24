@@ -133,60 +133,79 @@ eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParam
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkNavWaypointMissionItem(mavlink_mission_item_t* missionItem, float latitude, float longitude, float altitude, float yaw)
 {
     return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
-                                                                            missionItem,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_WAYPOINT_DEFAULT_TIME,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_WAYPOINT_DEFAULT_RADIUS,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_WAYPOINT_DEFAULT_ORBIT,
-                                                                            yaw,
-                                                                            latitude,
-                                                                            longitude,
-                                                                            altitude,
-                                                                            MAV_CMD_NAV_WAYPOINT,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
-                                                                            );
+            missionItem,
+            ARMAVLINK_MISSION_ITEM_UTILS_WAYPOINT_DEFAULT_TIME,
+            ARMAVLINK_MISSION_ITEM_UTILS_WAYPOINT_DEFAULT_RADIUS,
+            ARMAVLINK_MISSION_ITEM_UTILS_WAYPOINT_DEFAULT_ORBIT,
+            yaw,
+            latitude,
+            longitude,
+            altitude,
+            MAV_CMD_NAV_WAYPOINT,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
+    );
+}
+
+eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkNavWaypointMissionItemWithRadius(mavlink_mission_item_t* missionItem, float latitude, float longitude, float altitude, float radius)
+{
+    return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
+            missionItem,
+            ARMAVLINK_MISSION_ITEM_UTILS_WAYPOINT_DEFAULT_TIME,
+            ARMAVLINK_MISSION_ITEM_UTILS_WAYPOINT_DEFAULT_RADIUS,
+            radius,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            latitude,
+            longitude,
+            altitude,
+            MAV_CMD_NAV_WAYPOINT,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
+    );
 }
 
 /* MAV_CMD_NAV_LAND */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkLandMissionItem(mavlink_mission_item_t* missionItem, float latitude, float longitude, float altitude, float yaw)
 {
     return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
-                                                                            missionItem,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            yaw,
-                                                                            latitude,
-                                                                            longitude,
-                                                                            altitude,
-                                                                            MAV_CMD_NAV_LAND,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
-                                                                            );
+            missionItem,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            yaw,
+            latitude,
+            longitude,
+            altitude,
+            MAV_CMD_NAV_LAND,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
+    );
 }
 
 /* MAV_CMD_NAV_TAKEOFF */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkTakeoffMissionItem(mavlink_mission_item_t* missionItem, float latitude, float longitude, float altitude, float yaw, float pitch)
 {
     return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
-                                                                            missionItem,
-                                                                            pitch,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            yaw,
-                                                                            latitude,
-                                                                            longitude,
-                                                                            altitude,
-                                                                            MAV_CMD_NAV_TAKEOFF,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
-                                                                            );
+            missionItem,
+            pitch,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            yaw,
+            latitude,
+            longitude,
+            altitude,
+            MAV_CMD_NAV_TAKEOFF,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
+    );
 }
 
 /* MAV_CMD_NAV_DO_CHANGE_SPEED */
@@ -201,20 +220,20 @@ eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkChangeSpeedMissionItem(
     if (error == ARMAVLINK_OK)
     {
         error = ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
-                                                                                 missionItem,
-                                                                                 groundSpeed,
-                                                                                 speed,
-                                                                                 throttle,
-                                                                                 ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                                 ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                                 ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                                 ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                                 MAV_CMD_DO_CHANGE_SPEED,
-                                                                                 ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
-                                                                                 ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
-                                                                                 ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
-                                                                                 ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
-                                                                                 );
+                missionItem,
+                groundSpeed,
+                speed,
+                throttle,
+                ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+                MAV_CMD_DO_CHANGE_SPEED,
+                ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
+                ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
+                ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
+                ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
+        );
     }
     
     return error;
@@ -224,156 +243,194 @@ eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkChangeSpeedMissionItem(
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkVideoStartCapture(mavlink_mission_item_t* missionItem, int cameraId, float framesPerSeconds, float resolution)
 {
     return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
-                                                                                    missionItem,
-                                                                                    cameraId,
-                                                                                    framesPerSeconds,
-                                                                                    resolution,
-                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                                    MAV_CMD_VIDEO_START_CAPTURE,
-                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
-                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
-                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
-                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
-                                                                                    );
+            missionItem,
+            cameraId,
+            framesPerSeconds,
+            resolution,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            MAV_CMD_VIDEO_START_CAPTURE,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
+    );
 }
 
 /* MAV_CMD_VIDEO_STOP_CAPTURE */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkVideoStopCapture(mavlink_mission_item_t* missionItem)
 {
     return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
-                                                                                    missionItem,
-                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                                    MAV_CMD_VIDEO_STOP_CAPTURE,
-                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
-                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
-                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
-                                                                                    ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
-                                                                                    );
+            missionItem,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            MAV_CMD_VIDEO_STOP_CAPTURE,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
+    );
 }
 
 /* MAV_CMD_IMAGE_START_CAPTURE */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkImageStartCapture(mavlink_mission_item_t* missionItem,float period,float imagesCount,float resolution)
 {
     return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
-                                                                            missionItem,
-                                                                            period,
-                                                                            imagesCount,
-                                                                            resolution,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            MAV_CMD_IMAGE_START_CAPTURE,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
-                                                                            );
+            missionItem,
+            period,
+            imagesCount,
+            resolution,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            MAV_CMD_IMAGE_START_CAPTURE,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
+    );
 }
 
 /* MAV_CMD_IMAGE_STOP_CAPTURE */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkImageStopCapture(mavlink_mission_item_t* missionItem)
 {
     return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
-                                                                            missionItem,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            MAV_CMD_IMAGE_STOP_CAPTURE,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
-                                                                            );
+            missionItem,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            MAV_CMD_IMAGE_STOP_CAPTURE,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
+    );
 }
 
 /* MAV_CMD_CONDITION_DELAY */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkDelay(mavlink_mission_item_t* missionItem,float duration)
 {
     return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
-                                                                            missionItem,
-                                                                            duration,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            MAV_CMD_CONDITION_DELAY,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
-                                                                            );
+            missionItem,
+            duration,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            MAV_CMD_CONDITION_DELAY,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
+    );
 }
 
 /* MAV_CMD_PANORAMA_CREATE */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkCreatePanorama(mavlink_mission_item_t* missionItem,float horizontalAngle,float verticalAngle,float horizontalRotationSpeed,float verticalRotationSpeed)
 {
     return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
-                                                                            missionItem,
-                                                                            horizontalAngle,
-                                                                            verticalAngle,
-                                                                            horizontalRotationSpeed,
-                                                                            verticalRotationSpeed,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            MAV_CMD_PANORAMA_CREATE,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
-                                                                            );
+            missionItem,
+            horizontalAngle,
+            verticalAngle,
+            horizontalRotationSpeed,
+            verticalRotationSpeed,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            MAV_CMD_PANORAMA_CREATE,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
+    );
 }
 
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkSetROI(mavlink_mission_item_t* missionItem, MAV_ROI mode, int missionIndex, int roiIndex, float latitude, float longitude, float altitude)
 {
     return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
-                                                                            missionItem,
-                                                                            mode,
-                                                                            missionIndex,
-                                                                            roiIndex,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            latitude,
-                                                                            longitude,
-                                                                            altitude,
-                                                                            MAV_CMD_DO_SET_ROI,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
-                                                                            );
+            missionItem,
+            mode,
+            missionIndex,
+            roiIndex,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            latitude,
+            longitude,
+            altitude,
+            MAV_CMD_DO_SET_ROI,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
+    );
 }
 
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkSetViewMode(mavlink_mission_item_t* missionItem, MAV_VIEW_MODE_TYPE type, int roiIndex)
 {
     return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
-                                                                            missionItem,
-                                                                            type,
-                                                                            roiIndex,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
-                                                                            MAV_CMD_SET_VIEW_MODE,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
-                                                                            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
-                                                                            );
+            missionItem,
+            type,
+            roiIndex,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            MAV_CMD_SET_VIEW_MODE,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
+    );
+}
+
+eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkSetPictureMode(mavlink_mission_item_t* missionItem,
+        MAV_STILL_CAPTURE_MODE_TYPE type, float interval) {
+    return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
+            missionItem,
+            type,
+            interval,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            MAV_CMD_SET_STILL_CAPTURE_MODE,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
+    );
+}
+
+eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkSetPhotoSensors(mavlink_mission_item_t* missionItem,
+        uint32_t sensorsBitfield) {
+    return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
+            missionItem,
+            sensorsBitfield,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            ARMAVLINK_MISSION_ITEM_UTILS_EMPTY_PARAM,
+            MAV_CMD_SET_PHOTO_SENSORS,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_SEQ,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_POSITION_REFENTIAL,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_CURRENT,
+            ARMAVLINK_MISSION_ITEM_UTILS_DEFAULT_AUTOCONTINUE
+    );
 }

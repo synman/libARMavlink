@@ -89,6 +89,14 @@ Java_com_parrot_arsdk_armavlink_ARMavlinkMissionItem_nativeCreateMavlinkNavWaypo
 }
 
 JNIEXPORT jint JNICALL
+Java_com_parrot_arsdk_armavlink_ARMavlinkMissionItem_nativeCreateMavlinkNavWaypointMissionItemWithRadius (JNIEnv *env, jclass class, jlong missionItemPtr, jfloat latitude, jfloat longitude, jfloat altitude, jfloat radius)
+{
+    mavlink_mission_item_t *item = (mavlink_mission_item_t*) (intptr_t) missionItemPtr;
+    ARSAL_PRINT(ARSAL_PRINT_DEBUG, ARMAVLINK_JNIMAVLINK_TAG, "native - CreateMavlinkNavWaypointMissionItem (with radius)");
+    return ARMAVLINK_MissionItemUtils_CreateMavlinkNavWaypointMissionItemWithRadius(item, latitude, longitude, altitude, radius);
+}
+
+JNIEXPORT jint JNICALL
 Java_com_parrot_arsdk_armavlink_ARMavlinkMissionItem_nativeCreateMavlinkLandMissionItem (JNIEnv *env, jclass class, jlong missionItemPtr, jfloat latitude, jfloat longitude, jfloat altitude, jfloat yaw)
 {
     mavlink_mission_item_t *item = (mavlink_mission_item_t*) (intptr_t) missionItemPtr;
@@ -169,6 +177,22 @@ Java_com_parrot_arsdk_armavlink_ARMavlinkMissionItem_nativeCreateMavlinkSetViewM
     mavlink_mission_item_t *item = (mavlink_mission_item_t*) (intptr_t) missionItemPtr;
     ARSAL_PRINT(ARSAL_PRINT_DEBUG, ARMAVLINK_JNIMAVLINK_TAG, "native - CreateMavlinkSetViewMode");
     return ARMAVLINK_MissionItemUtils_CreateMavlinkSetViewMode(item, viewModeType, roiIndex);
+}
+
+JNIEXPORT jint JNICALL
+Java_com_parrot_arsdk_armavlink_ARMavlinkMissionItem_nativeCreateMavlinkSetPictureMode (JNIEnv *env, jclass class, jlong missionItemPtr, jint captureMode, jfloat interval)
+{
+    mavlink_mission_item_t *item = (mavlink_mission_item_t*) (intptr_t) missionItemPtr;
+    ARSAL_PRINT(ARSAL_PRINT_DEBUG, ARMAVLINK_JNIMAVLINK_TAG, "native - CreateMavlinkSetPictureMode");
+    return ARMAVLINK_MissionItemUtils_CreateMavlinkSetPictureMode(item, captureMode, interval);
+}
+
+JNIEXPORT jint JNICALL
+Java_com_parrot_arsdk_armavlink_ARMavlinkMissionItem_nativeCreateMavlinkSetPhotoSensors (JNIEnv *env, jclass class, jlong missionItemPtr, jint sensorsBitfield)
+{
+    mavlink_mission_item_t *item = (mavlink_mission_item_t*) (intptr_t) missionItemPtr;
+    ARSAL_PRINT(ARSAL_PRINT_DEBUG, ARMAVLINK_JNIMAVLINK_TAG, "native - CreateMavlinkSetPhotoSensors");
+    return ARMAVLINK_MissionItemUtils_CreateMavlinkSetPhotoSensors(item, sensorsBitfield);
 }
 
 /*****************************************
