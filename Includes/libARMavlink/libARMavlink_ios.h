@@ -307,7 +307,7 @@ eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParam
  * @return ARMAVLINK_OK if operation went well, the enum description of the error otherwise
  */
 eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkNavWaypointMissionItem(mavlink_mission_item_t* missionItem,
-                                                                                float latitude, float longitude, float altitude, float yaw);
+                                                                                float latitude, float longitude, float altitude, float yaw, float param3);
 
 /**
  * @brief Fill a nav mission item with the given params, the default params

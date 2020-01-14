@@ -57,7 +57,7 @@ public class ARMavlinkFileParser
     public ARMavlinkMissionItemList parseFile(String filePath) throws ARMavlinkException
     {
         ARMavlinkMissionItemList missionList = new ARMavlinkMissionItemList();
-        nativeParse(nativeFileParser, filePath, missionList.getNativePointre());
+        nativeParse(nativeFileParser, filePath, missionList.getNativePointer());
         return missionList;
     }
 

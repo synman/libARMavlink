@@ -86,11 +86,11 @@ Java_com_parrot_arsdk_armavlink_ARMavlinkMissionItem_nativeCreateMavlinkMissionI
 }
 
 JNIEXPORT jint JNICALL
-Java_com_parrot_arsdk_armavlink_ARMavlinkMissionItem_nativeCreateMavlinkNavWaypointMissionItem (JNIEnv *env, jclass class, jlong missionItemPtr, jfloat latitude, jfloat longitude, jfloat altitude, jfloat yaw)
+Java_com_parrot_arsdk_armavlink_ARMavlinkMissionItem_nativeCreateMavlinkNavWaypointMissionItem (JNIEnv *env, jclass class, jlong missionItemPtr, jfloat latitude, jfloat longitude, jfloat altitude, jfloat yaw, jfloat param3)
 {
     mavlink_mission_item_t *item = (mavlink_mission_item_t*) (intptr_t) missionItemPtr;
     ULOGD("native - CreateMavlinkNavWaypointMissionItem");
-    eARMAVLINK_ERROR res = ARMAVLINK_MissionItemUtils_CreateMavlinkNavWaypointMissionItem(item, latitude, longitude, altitude, yaw);
+    eARMAVLINK_ERROR res = ARMAVLINK_MissionItemUtils_CreateMavlinkNavWaypointMissionItem(item, latitude, longitude, altitude, yaw, param3);
     if (res != ARMAVLINK_OK)
         ULOGE("native - Create Mavlink NavWaypoint Mission Item Error : (%d) %s ", res, ARMAVLINK_Error_ToString(res));
 
@@ -457,6 +457,7 @@ Java_com_parrot_arsdk_armavlink_ARMavlinkMissionItem_nativeGetParam3(JNIEnv *env
         mavlink_mission_item_t *item = (mavlink_mission_item_t*) (intptr_t) missionItemPtr;
         retVal = item->param3;
     }
+
     return retVal;
 }
 

@@ -127,13 +127,13 @@ eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParam
 /* ******************* Specific commands ***************** */
 
 /* MAV_CMD_NAV_WAYPOINT */
-eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkNavWaypointMissionItem(mavlink_mission_item_t* missionItem, float latitude, float longitude, float altitude, float yaw)
+eARMAVLINK_ERROR ARMAVLINK_MissionItemUtils_CreateMavlinkNavWaypointMissionItem(mavlink_mission_item_t* missionItem, float latitude, float longitude, float altitude, float yaw, float param3)
 {
     return ARMAVLINK_MissionItemUtils_CreateMavlinkMissionItemWithAllParams(
             missionItem,
             ARMAVLINK_MISSION_ITEM_UTILS_WAYPOINT_DEFAULT_TIME,
             ARMAVLINK_MISSION_ITEM_UTILS_WAYPOINT_DEFAULT_RADIUS,
-            ARMAVLINK_MISSION_ITEM_UTILS_WAYPOINT_DEFAULT_ORBIT,
+            param3,
             yaw,
             latitude,
             longitude,

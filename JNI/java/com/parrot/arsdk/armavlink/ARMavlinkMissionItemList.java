@@ -62,7 +62,7 @@ public class ARMavlinkMissionItemList
         } 
     }
 
-    public long getNativePointre()
+    public long getNativePointer()
     {
         return nativeMissionItemList;
     }
@@ -79,6 +79,7 @@ public class ARMavlinkMissionItemList
             long missionItemPtr = nativeMissionItemListGet(nativeMissionItemList, index);
             missionItem = new ARMavlinkMissionItem(missionItemPtr);
             missionItem.updateCommandCode();
+            missionItem.updateParam3();
         }
         return missionItem;
     }

@@ -36,7 +36,7 @@ public class ARMavlinkMissionItem
     private static String TAG = ARMavlinkMissionItem.class.getSimpleName();
 
     private static native int nativeCreateMavlinkMissionItemWithAllParams(long nativeItem, float param1, float param2, float param3, float param4, float latitude, float longitude, float altitude, int command, int seq,  int frame, int current, int autocontinue);
-    private static native int nativeCreateMavlinkNavWaypointMissionItem(long nativeItem, float latitude, float longitude, float altitude, float yaw);
+    private static native int nativeCreateMavlinkNavWaypointMissionItem(long nativeItem, float latitude, float longitude, float altitude, float yaw, float param3);
     private static native int nativeCreateMavlinkNavWaypointMissionItemWithRadius(long nativeItem, float latitude, float longitude, float altitude, float radius);
     private static native int nativeCreateMavlinkLandMissionItem(long nativeItem, float latitude, float longitude, float altitude, float yaw);
     private static native int nativeCreateMavlinkChangeSpeedMissionItem(long nativeItem, int groundSpeed, float speed, float throttle);
@@ -199,10 +199,10 @@ public class ARMavlinkMissionItem
      * @param yaw (saved in param4) the yaw of the mission item
      * @return {@link ARMavlinkMissionItem} mission item
      */
-    public static ARMavlinkMissionItem CreateMavlinkNavWaypointMissionItem(float latitude, float longitude, float altitude, float yaw)
+    public static ARMavlinkMissionItem CreateMavlinkNavWaypointMissionItem(float latitude, float longitude, float altitude, float yaw, float param3)
     {
         ARMavlinkMissionItem missionItem = new ARMavlinkMissionItem();
-        int value = nativeCreateMavlinkNavWaypointMissionItem(missionItem.getNativePointer(), latitude, longitude, altitude, yaw);
+        int value = nativeCreateMavlinkNavWaypointMissionItem(missionItem.getNativePointer(), latitude, longitude, altitude, yaw, param3);
 
         ARMAVLINK_ERROR_ENUM error = ARMAVLINK_ERROR_ENUM.getFromValue(value);
 
@@ -628,6 +628,13 @@ public class ARMavlinkMissionItem
         } 
     }
 
+    public void updateParam3()
+    {
+        if(nativeMissionItem != 0){
+            this.param3 = nativeGetParam3(nativeMissionItem);
+        }
+    }
+
     public float getParam1() 
     {
         return param1;
@@ -871,5 +878,4 @@ public class ARMavlinkMissionItem
                 + ", current=" + current + ", autocontinue=" + autocontinue
                 + "]";
     }
-
 }
